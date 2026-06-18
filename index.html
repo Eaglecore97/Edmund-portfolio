@@ -1,0 +1,1504 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Edmund Chan — Senior Graphic Designer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Instrument+Sans:ital,wght@0,400;0,500;0,600;1,400&family=Spline+Sans+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#141210;
+    --ink-2:#1c1814;
+    --surface:#221d18;
+    --line:#332c25;
+    --paper:#ede8e0;
+    --paper-2:#e2dccf;
+    --paper-line:#cabfae;
+    --white:#f5f1ea;
+    --muted:#9a938a;
+    --muted-dim:#6f685f;
+    --ink-on-paper:#1b1714;
+    --muted-on-paper:#6a6157;
+    --accent:#f2a33c;
+    --accent-deep:#d6791b;
+    --ember:#c8431c;
+    --display:"Bricolage Grotesque",sans-serif;
+    --body:"Instrument Sans",sans-serif;
+    --mono:"Spline Sans Mono",monospace;
+    --maxw:1280px;
+    --gut:clamp(20px,5vw,72px);
+  }
+
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    background:var(--ink);
+    color:var(--white);
+    font-family:var(--body);
+    font-size:clamp(15px,1.05vw,17px);
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+  }
+  ::selection{background:var(--accent);color:#1a1410}
+  a{color:inherit;text-decoration:none}
+  img,svg{display:block;max-width:100%}
+  :focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:2px}
+
+  /* film grain */
+  .grain{position:fixed;inset:0;z-index:9999;pointer-events:none;opacity:.05;mix-blend-mode:overlay}
+
+  .wrap{max-width:var(--maxw);margin:0 auto;padding-inline:var(--gut)}
+  .mono{font-family:var(--mono);font-size:.72rem;letter-spacing:.16em;text-transform:uppercase}
+  .eyebrow{font-family:var(--mono);font-size:.7rem;letter-spacing:.2em;text-transform:uppercase;color:var(--accent)}
+
+  /* ---------- NAV ---------- */
+  nav{
+    position:absolute;top:14px;left:0;right:0;margin-inline:auto;z-index:100;
+    width:min(calc(100% - 28px), var(--maxw));
+    display:flex;align-items:center;justify-content:space-between;
+    padding:13px clamp(18px,3vw,26px);
+    background:rgba(20,18,16,.55);
+    backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
+    border:1px solid var(--line);
+    border-radius:16px;
+    transition:background .35s ease,border-color .35s ease;
+  }
+  nav.scrolled{background:rgba(20,18,16,.8)}
+  .brand{display:flex;align-items:center;gap:12px;font-family:var(--display);font-weight:700;letter-spacing:-.01em}
+  .brand .mark{
+    width:34px;height:34px;border-radius:50%;
+    border:1.5px solid var(--accent);background:transparent;color:var(--accent);
+    display:grid;place-items:center;font-family:var(--display);font-size:1rem;font-weight:700;letter-spacing:0;
+    transition:background .25s,color .25s;
+  }
+  .brand:hover .mark{background:var(--accent);color:#1a1410}
+  .nav-links{display:flex;align-items:center;gap:34px}
+  .nav-links a{font-family:var(--mono);font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);transition:color .2s}
+  .nav-links a:hover{color:var(--white)}
+  .status{display:inline-flex;align-items:center;gap:8px;font-family:var(--mono);font-size:.68rem;letter-spacing:.12em;text-transform:uppercase;color:var(--white)}
+  .dot{width:7px;height:7px;border-radius:50%;background:#6fd28a;box-shadow:0 0 0 0 rgba(111,210,138,.6);animation:pulse 2.4s infinite}
+  @keyframes pulse{0%{box-shadow:0 0 0 0 rgba(111,210,138,.55)}70%{box-shadow:0 0 0 7px rgba(111,210,138,0)}100%{box-shadow:0 0 0 0 rgba(111,210,138,0)}}
+  .menu-btn{display:none;background:none;border:1px solid var(--line);color:var(--white);font-family:var(--mono);font-size:.7rem;letter-spacing:.12em;padding:8px 12px;border-radius:6px;cursor:pointer}
+
+  /* ---------- HERO ---------- */
+  .hero{position:sticky;top:0;z-index:0;min-height:100svh;display:flex;flex-direction:column;justify-content:flex-end;padding-bottom:clamp(28px,4vw,52px);overflow:hidden}
+  .hero-glow{position:absolute;top:-10%;right:-5%;width:60vw;height:60vw;max-width:760px;max-height:760px;background:radial-gradient(circle at 60% 40%,rgba(242,163,60,.20),rgba(242,163,60,0) 62%);pointer-events:none}
+  .hero-inner{position:relative;z-index:3;width:100%;max-width:var(--maxw);margin:0 auto;padding-inline:var(--gut);padding-top:clamp(110px,16vh,150px);padding-bottom:clamp(60px,9vh,110px);min-height:100svh;display:flex;flex-direction:column}
+  .hero-top{display:flex;justify-content:space-between;align-items:flex-end;gap:24px;flex-wrap:wrap;margin-bottom:clamp(18px,3vw,30px)}
+  .hero-role{max-width:34ch}
+  .hero-role .eyebrow{display:block;margin-bottom:12px}
+  .hero-role p{color:var(--muted);font-size:clamp(.95rem,1.4vw,1.12rem);line-height:1.5}
+  .hero-coords{text-align:right;color:var(--muted-dim);line-height:1.7}
+  .hero-coords b{color:var(--white);font-weight:500}
+  .hero-eyebrow{display:block;margin-bottom:auto}
+  .hero-foot{margin-top:clamp(22px,3.4vw,38px);max-width:620px;display:flex;flex-direction:column;gap:14px}
+  .hero-thesis{color:var(--muted);font-size:clamp(.95rem,1.4vw,1.12rem);line-height:1.5;max-width:46ch;margin:0}
+  .hero-meta{color:var(--muted-dim)}
+
+  .namegrid{position:relative;display:grid;grid-template-columns:1fr auto;gap:clamp(16px,3vw,48px);align-items:end}
+  .bigname{margin-top:auto;font-family:var(--display);font-weight:800;line-height:.84;letter-spacing:-.03em;font-size:clamp(3.6rem,15vw,13rem);color:var(--white)}
+  .bigname .ln{display:block;overflow:hidden}
+  .bigname .ln span{display:block;transform:translateY(110%);will-change:transform}
+  .loaded .bigname .ln span{transform:translateY(0);transition:transform 1s cubic-bezier(.16,1,.3,1)}
+  .loaded .bigname .ln:nth-child(2) span{transition-delay:.09s}
+  .bigname em{font-style:normal;color:var(--accent)}
+
+  /* portrait frame */
+  .portrait{
+    position:relative;width:clamp(150px,18vw,272px);aspect-ratio:3/4;border-radius:10px;overflow:hidden;flex:none;
+    border:1px solid var(--line);
+  }
+  .portrait .duo{position:absolute;inset:0}
+  .portrait figcaption{position:absolute;left:0;right:0;bottom:0;padding:10px 12px;background:linear-gradient(transparent,rgba(20,18,16,.85));font-family:var(--mono);font-size:.6rem;letter-spacing:.12em;text-transform:uppercase;color:var(--white)}
+  .portrait::after{content:"";position:absolute;inset:0;box-shadow:inset 0 0 70px rgba(20,18,16,.55)}
+
+  /* peek-of-work strip */
+  .peek{margin-top:clamp(26px,4vw,46px);display:flex;align-items:center;gap:18px;border-top:1px solid var(--line);padding-top:18px;flex-wrap:wrap}
+  .peek .lbl{font-family:var(--mono);font-size:.7rem;letter-spacing:.16em;text-transform:uppercase;color:var(--muted)}
+  .peek .thumbs{display:flex;gap:10px;margin-left:auto}
+  .peek .thumbs a{position:relative;width:84px;height:54px;border-radius:6px;overflow:hidden;border:1px solid var(--line);filter:grayscale(.2);transition:transform .3s,filter .3s,border-color .3s}
+  .peek .thumbs a:hover{transform:translateY(-3px);filter:grayscale(0);border-color:var(--accent)}
+  .peek .thumbs svg{width:100%;height:100%}
+  .scrollcue{position:absolute;left:var(--gut);bottom:18px;z-index:2;font-family:var(--mono);font-size:.62rem;letter-spacing:.18em;text-transform:uppercase;color:var(--muted-dim);display:flex;align-items:center;gap:8px}
+  .scrollcue .bar{width:1px;height:34px;background:linear-gradient(var(--accent),transparent);animation:drop 1.8s infinite}
+  @keyframes drop{0%{transform:scaleY(.2);transform-origin:top}50%{transform:scaleY(1);transform-origin:top}50.01%{transform:scaleY(1);transform-origin:bottom}100%{transform:scaleY(.2);transform-origin:bottom}}
+
+  /* ---------- HERO CUT-OUT ---------- */
+  .hero-cut{position:absolute;right:0;bottom:0;height:96%;z-index:4;pointer-events:none;animation:heroCutIn 1.25s cubic-bezier(.16,1,.3,1) both}
+  .hero-cut img{height:100%;width:auto;display:block;filter:contrast(1.03) saturate(1.02);
+    -webkit-mask-image:linear-gradient(to bottom,#000 0,#000 64%,rgba(0,0,0,.90) 70%,rgba(0,0,0,.62) 75%,rgba(0,0,0,.32) 80%,rgba(0,0,0,.10) 84%,transparent 88%);
+    mask-image:linear-gradient(to bottom,#000 0,#000 64%,rgba(0,0,0,.90) 70%,rgba(0,0,0,.62) 75%,rgba(0,0,0,.32) 80%,rgba(0,0,0,.10) 84%,transparent 88%)}
+  .hero-cut-glow{position:absolute;right:7%;top:5%;width:44vw;max-width:600px;aspect-ratio:1;z-index:1;pointer-events:none;
+    background:radial-gradient(circle,rgba(242,163,60,.20),transparent 62%)}
+  @keyframes heroCutIn{from{opacity:0;transform:translateY(26px) scale(1.02)}to{opacity:1;transform:none}}
+
+  /* ---------- MARQUEE ---------- */
+  .marquee{border-block:1px solid var(--line);background:var(--ink-2);overflow:hidden;white-space:nowrap;padding:16px 0}
+  .marquee-track{display:inline-flex;gap:0;animation:scroll 28s linear infinite}
+  .marquee span{font-family:var(--display);font-weight:700;font-size:clamp(1.1rem,2.4vw,1.9rem);letter-spacing:-.01em;padding:0 26px;color:var(--white)}
+  .marquee span.dim{color:var(--muted-dim)}
+  .marquee .star{color:var(--accent)}
+  @keyframes scroll{to{transform:translateX(-50%)}}
+
+  /* ---------- SECTION HEAD ---------- */
+  .sec{padding-block:clamp(64px,9vw,128px)}
+  .sechead{display:flex;justify-content:space-between;align-items:flex-end;gap:24px;flex-wrap:wrap;margin-bottom:clamp(36px,5vw,64px)}
+  .sechead h2{font-family:var(--display);font-weight:700;font-size:clamp(2rem,4.4vw,3.4rem);letter-spacing:-.02em;line-height:1}
+  .sechead .num{font-family:var(--mono);font-size:.72rem;letter-spacing:.18em;color:var(--muted-dim)}
+
+  /* ---------- SIGNPOST (3D crossed signs) ---------- */
+  .signpost{position:relative;margin-bottom:clamp(20px,4vw,48px)}
+  .sp-stage{position:relative;height:clamp(340px,44vw,540px);perspective:1200px;display:grid;place-items:center}
+  .sp-glow{position:absolute;inset:-6% -2%;background:radial-gradient(closest-side at 54% 40%,rgba(242,163,60,.20),transparent 72%);filter:blur(6px);pointer-events:none}
+  .sp-scene{position:relative;width:min(600px,88%);height:78%;transform-style:preserve-3d;transform:rotateX(var(--rx,7deg)) rotateY(var(--ry,-13deg));transition:transform .3s cubic-bezier(.16,1,.3,1);will-change:transform}
+  .sp-anim{animation:spFloat 7s ease-in-out infinite}
+  @keyframes spFloat{0%,100%{translate:0 -7px}50%{translate:0 9px}}
+  .sp-pole{position:absolute;left:50%;top:4%;width:24px;height:92%;transform:translate(-50%,0) translateZ(-36px);border-radius:7px;background:linear-gradient(90deg,#322d27,#6b6258 33%,#928779 50%,#574f47 70%,#272320);box-shadow:0 34px 50px -12px rgba(0,0,0,.7)}
+  .sp-pole::before{content:"";position:absolute;left:50%;top:-15px;width:38px;height:20px;transform:translateX(-50%);border-radius:6px;background:linear-gradient(90deg,#272320,#857a6c,#302c26)}
+  .sp-base{position:absolute;left:50%;bottom:-9%;width:190px;height:38px;transform:translate(-50%,0) translateZ(-36px) rotateX(76deg);border-radius:50%;background:radial-gradient(ellipse,rgba(0,0,0,.65),transparent 70%);pointer-events:none}
+  .sp-sign{position:absolute;left:50%;border-radius:13px;padding:0 clamp(18px,2.8vw,32px);transform-style:preserve-3d;align-content:center}
+  .sp-label{font-family:var(--display);font-weight:800;letter-spacing:-.02em;line-height:.9;white-space:nowrap}
+  .sp-top{display:grid;top:11%;height:clamp(62px,8.4vw,104px);transform:translate(-53%,0) translateZ(8px) rotateZ(-6deg);background:linear-gradient(166deg,#28241e,#141109);border:1px solid rgba(242,163,60,.5);box-shadow:2px 3px 0 #100d0a,4px 6px 0 #0d0b09,6px 9px 0 #0b0a08,8px 12px 0 #090806,10px 15px 0 #070604,12px 17px 26px rgba(0,0,0,.6),inset 0 1px 0 rgba(255,255,255,.09),inset 0 -3px 7px rgba(0,0,0,.55)}
+  .sp-top .sp-label{font-size:clamp(1.45rem,3.3vw,2.6rem);color:var(--paper)}
+  .sp-top .sp-label b{color:var(--accent);font-weight:800}
+  .sp-cross{display:flex;align-items:center;gap:clamp(13px,1.9vw,24px);top:46%;height:clamp(68px,8.8vw,112px);transform:translate(-45%,0) translateZ(28px) rotateZ(5deg);background:linear-gradient(166deg,#f8b659,#df8a1d);border:1px solid rgba(255,222,162,.6);box-shadow:2px 3px 0 #a85f12,4px 6px 0 #985610,6px 9px 0 #884d0e,8px 12px 0 #78440c,10px 15px 0 #683b0a,12px 17px 28px rgba(0,0,0,.55),inset 0 1px 0 rgba(255,255,255,.42),inset 0 -3px 9px rgba(120,58,0,.45)}
+  .sp-cross .sp-txt{display:flex;flex-direction:column;gap:5px}
+  .sp-cross .sp-label{font-size:clamp(1.15rem,2.7vw,2.1rem);color:#1a1208}
+  .sp-cross .sp-sub{font-family:var(--mono);font-size:.56rem;letter-spacing:.16em;text-transform:uppercase;color:#5a3c08}
+  .sp-arrow{flex:none;width:clamp(32px,4.4vw,56px);height:clamp(24px,3.3vw,42px);background:#1a1208;clip-path:polygon(0 33%,58% 33%,58% 11%,100% 50%,58% 89%,58% 67%,0 67%)}
+  .sp-sticker{position:absolute;display:grid;place-items:center;border-radius:50%;font-family:var(--mono);text-transform:uppercase;color:#1a1208;font-weight:700;text-align:center;background:conic-gradient(from 200deg,#ffe7b0,#f2a33c,#ffd790,#e08c1f,#ffe7b0);box-shadow:0 5px 12px rgba(0,0,0,.45),inset 0 1px 2px rgba(255,255,255,.55),inset 0 -2px 4px rgba(150,80,0,.4)}
+  .sp-st1{width:clamp(44px,5.8vw,70px);aspect-ratio:1;top:2%;right:2%;transform:translateZ(18px) rotate(12deg);font-family:var(--display);font-size:clamp(1.1rem,2vw,1.7rem)}
+  .sp-st2{width:clamp(36px,4.8vw,56px);aspect-ratio:1;top:50%;left:-1%;transform:translateZ(36px) rotate(-10deg);font-size:1rem}
+  .sp-st3{width:clamp(42px,5.3vw,64px);aspect-ratio:1;bottom:1%;right:14%;transform:translateZ(36px) rotate(8deg);font-size:.5rem;line-height:1.15;letter-spacing:.06em}
+  @media(max-width:560px){.sp-scene{--rx:6deg;--ry:-8deg;width:94%}.sp-top{transform:translate(-53%,0) translateZ(8px) rotateZ(-6deg)}}
+  @media(prefers-reduced-motion:reduce){.sp-anim{animation:none}}
+
+  /* ---------- WORK ---------- */
+  .project{display:grid;grid-template-columns:1fr 1fr;gap:clamp(24px,4vw,64px);align-items:center;padding-block:clamp(32px,5vw,56px);border-top:1px solid var(--line)}
+  .project.flip .p-media{order:2}
+  .p-media{position:relative;aspect-ratio:4/3;border-radius:12px;overflow:hidden;border:1px solid var(--line);background:var(--ink-2)}
+  .p-media svg{position:absolute;inset:0;width:100%;height:100%}
+  .p-media .tag{position:absolute;top:14px;left:14px;font-family:var(--mono);font-size:.62rem;letter-spacing:.12em;text-transform:uppercase;background:rgba(20,18,16,.7);backdrop-filter:blur(6px);padding:6px 10px;border-radius:20px;border:1px solid var(--line);color:var(--white)}
+  .p-media::after{content:"";position:absolute;inset:0;background:linear-gradient(120deg,rgba(242,163,60,0) 60%,rgba(242,163,60,.12));opacity:0;transition:opacity .4s}
+  .project:hover .p-media::after{opacity:1}
+  .p-media svg,.p-media img{transition:transform .6s cubic-bezier(.16,1,.3,1)}
+  .project:hover .p-media svg,.project:hover .p-media img{transform:scale(1.04)}
+  .p-meta .idx{font-family:var(--mono);font-size:.74rem;letter-spacing:.18em;color:var(--accent);display:block;margin-bottom:14px}
+  .p-meta h3{font-family:var(--display);font-weight:700;font-size:clamp(1.7rem,3.3vw,2.6rem);letter-spacing:-.02em;line-height:1.02;margin-bottom:14px}
+  .p-meta .desc{color:var(--muted);max-width:42ch;margin-bottom:22px}
+  .p-tags{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:24px}
+  .p-tags li{list-style:none;font-family:var(--mono);font-size:.64rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);border:1px solid var(--line);padding:5px 11px;border-radius:20px}
+  .p-link{display:inline-flex;align-items:center;gap:10px;font-family:var(--mono);font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);border-bottom:1px solid var(--line);padding-bottom:6px;cursor:pointer;transition:gap .25s,border-color .25s,color .25s}
+  .p-link:hover{gap:16px;border-color:var(--accent);color:var(--accent)}
+  .p-link::after{content:"→";display:inline-block;will-change:transform}
+  .p-link{animation:pGlow 2.6s ease-in-out infinite}
+  .p-link::after{animation:pArrow 1.5s ease-in-out infinite}
+  .p-link:hover{animation:none}
+  .p-link:hover::after{animation-duration:.9s}
+  @keyframes pArrow{0%,100%{transform:translateX(0)}55%{transform:translateX(6px)}}
+  @keyframes pGlow{0%,100%{text-shadow:0 0 0 rgba(242,163,60,0)}50%{text-shadow:0 0 11px rgba(242,163,60,.45)}}
+  @media (prefers-reduced-motion: reduce){.p-link,.p-link::after{animation:none!important}}
+
+  /* ---------- ABOUT (paper flip) ---------- */
+  .about{background:var(--paper);color:var(--ink-on-paper)}
+  .about .eyebrow{color:var(--accent-deep)}
+  .about-grid{display:grid;grid-template-columns:.85fr 1.15fr;gap:clamp(32px,6vw,90px);align-items:start}
+  .yearsblock .years{font-family:var(--display);font-weight:800;font-size:clamp(5rem,13vw,11rem);line-height:.82;letter-spacing:-.04em;color:var(--ink-on-paper)}
+  .yearsblock .years em{font-style:normal;color:var(--accent-deep)}
+  .yearsblock .ylabel{font-family:var(--mono);font-size:.72rem;letter-spacing:.16em;text-transform:uppercase;color:var(--muted-on-paper);margin-top:10px}
+  .facts{margin-top:34px;border-top:1px solid var(--paper-line)}
+  .facts div{display:flex;justify-content:space-between;gap:16px;padding:13px 0;border-bottom:1px solid var(--paper-line);font-family:var(--mono);font-size:.74rem;letter-spacing:.04em;text-transform:uppercase}
+  .facts span:first-child{color:var(--muted-on-paper)}
+  .facts span:last-child{color:var(--ink-on-paper);text-align:right}
+  .philosophy h2{font-family:var(--display);font-weight:700;font-size:clamp(1.7rem,3.4vw,2.7rem);letter-spacing:-.02em;line-height:1.08;margin-bottom:26px}
+  .philosophy h2 em{font-style:normal;color:var(--accent-deep)}
+  .philosophy p{color:#4a443c;font-size:clamp(1rem,1.4vw,1.12rem);margin-bottom:18px;max-width:58ch}
+  .sign{margin-top:30px;font-family:var(--display);font-weight:700;font-size:1.5rem;color:var(--ink-on-paper);display:inline-block}
+
+  /* ---------- CONTACT ---------- */
+  .contact{padding-block:clamp(80px,12vw,180px);text-align:center;position:relative;overflow:hidden}
+  .contact .glow{position:absolute;left:50%;top:40%;transform:translate(-50%,-50%);width:80vw;max-width:900px;aspect-ratio:1;background:radial-gradient(circle,rgba(242,163,60,.14),transparent 60%);pointer-events:none}
+  .contact .eyebrow{position:relative;display:block;margin-bottom:24px}
+  .contact h2{position:relative;font-family:var(--display);font-weight:800;font-size:clamp(2.6rem,8vw,6.5rem);line-height:.92;letter-spacing:-.03em;margin-bottom:38px}
+  .contact h2 em{font-style:normal;color:var(--accent)}
+  .cta{position:relative;display:inline-flex;align-items:center;gap:14px;background:var(--accent);color:#1a1410;font-family:var(--mono);font-size:.82rem;letter-spacing:.1em;text-transform:uppercase;padding:18px 30px;border-radius:50px;font-weight:500;transition:transform .25s,box-shadow .25s}
+  .cta:hover{transform:translateY(-3px);box-shadow:0 14px 40px rgba(242,163,60,.28)}
+  button.cta{border:0;cursor:pointer}
+  .cta-reveal{margin-top:22px;display:flex;flex-direction:column;align-items:center;gap:12px;font-family:var(--mono);font-size:1rem;letter-spacing:.04em;color:var(--white);opacity:0;transform:translateY(14px);transition:opacity .6s cubic-bezier(.16,1,.3,1),transform .6s cubic-bezier(.16,1,.3,1);pointer-events:none}
+  .cta-reveal.show{opacity:1;transform:translateY(0);pointer-events:auto}
+  .cta-reveal .rv-email{color:var(--white);border-bottom:1px solid var(--line);padding-bottom:2px;transition:color .2s,border-color .2s}
+  .cta-reveal .rv-email:hover{color:var(--accent);border-color:var(--accent)}
+  .cta-reveal .rv-link{font-size:.8rem;letter-spacing:.08em;color:var(--muted);border-bottom:1px solid var(--line);padding-bottom:2px;transition:color .2s,border-color .2s}
+  .cta-reveal .rv-link:hover{color:var(--accent);border-color:var(--accent)}
+  .contact .alt{position:relative;margin-top:26px;font-family:var(--mono);font-size:.78rem;letter-spacing:.06em;color:var(--muted)}
+  .contact .alt a{color:var(--white);border-bottom:1px solid var(--line);padding-bottom:2px}
+  .contact .alt a:hover{color:var(--accent);border-color:var(--accent)}
+
+  footer{border-top:1px solid var(--line);padding-block:32px}
+  .foot{display:flex;justify-content:space-between;align-items:center;gap:18px;flex-wrap:wrap}
+  .foot .mono{color:var(--muted-dim)}
+  .foot .socials{display:flex;gap:22px}
+  .foot .socials a{font-family:var(--mono);font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);transition:color .2s}
+  .foot .socials a:hover{color:var(--accent)}
+
+  /* ---------- CAREER / EDUCATION ---------- */
+  .career{background:var(--paper-2);color:var(--ink-on-paper)}
+  .career .eyebrow{color:var(--accent-deep)}
+  .career-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:clamp(32px,6vw,80px);align-items:start}
+  .col-h{font-family:var(--display);font-weight:700;font-size:clamp(1.35rem,2.5vw,1.85rem);letter-spacing:-.01em;margin-bottom:26px;color:var(--ink-on-paper)}
+  .tl{list-style:none}
+  .tl li{position:relative;padding:0 0 26px 28px;border-left:1px solid var(--paper-line)}
+  .tl li:last-child{padding-bottom:0;border-left-color:transparent}
+  .tl li::before{content:"";position:absolute;left:-5px;top:4px;width:9px;height:9px;border-radius:50%;background:var(--paper-line)}
+  .tl li.now::before{background:var(--accent-deep);box-shadow:0 0 0 4px rgba(214,121,27,.18)}
+  .tl .yr{font-family:var(--mono);font-size:.66rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted-on-paper)}
+  .tl .role{font-weight:600;font-size:1.04rem;color:var(--ink-on-paper);margin-top:3px}
+  .tl .org{font-size:.9rem;color:#5a534a}
+  .edu{list-style:none}
+  .edu li{padding-bottom:22px}
+  .edu li:last-child{padding-bottom:0}
+  .edu .yr{font-family:var(--mono);font-size:.64rem;letter-spacing:.1em;color:var(--muted-on-paper);text-transform:uppercase}
+  .edu .deg{font-weight:600;color:var(--ink-on-paper);font-size:.98rem;margin-top:3px}
+  .edu .sch{font-size:.88rem;color:#5a534a}
+
+  /* ---------- TOOLKIT ---------- */
+  .toolkit-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:clamp(32px,6vw,80px);align-items:start}
+  .tools{display:flex;flex-wrap:wrap;gap:11px}
+  .tool{display:flex;align-items:center;gap:10px;border:1px solid var(--line);border-radius:10px;padding:11px 15px;background:var(--ink-2);transition:border-color .25s,transform .25s}
+  .tool:hover{border-color:var(--accent);transform:translateY(-2px)}
+  .tool .ic{width:30px;height:30px;border-radius:7px;display:grid;place-items:center;font-family:var(--display);font-weight:800;font-size:.78rem;flex:none}
+  .tool b{font-weight:500;font-size:.9rem}
+  .langbars{display:flex;flex-direction:column;gap:17px}
+  .lang .top{display:flex;justify-content:space-between;font-family:var(--mono);font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;margin-bottom:8px}
+  .lang .top span:last-child{color:var(--muted)}
+  .langbar{height:5px;border-radius:3px;background:var(--line);overflow:hidden}
+  .langbar i{display:block;height:100%;background:linear-gradient(90deg,var(--accent-deep),var(--accent));width:0;transition:width 1.1s cubic-bezier(.16,1,.3,1)}
+  .in .langbar i{width:var(--w)}
+
+  /* ---------- 3D / DEPTH / MOTION ---------- */
+  #webgl{position:absolute;inset:0;width:100%;height:100%;z-index:1;pointer-events:none}
+
+  /* ---------- cinematic enhancements ---------- */
+  .grain{position:fixed;inset:-25%;z-index:60;pointer-events:none;opacity:.055;mix-blend-mode:overlay;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");background-size:160px 160px;animation:grainShift .7s steps(1) infinite}
+  @keyframes grainShift{0%{transform:translate(0,0)}12%{transform:translate(-5%,-3%)}25%{transform:translate(4%,-5%)}37%{transform:translate(-3%,4%)}50%{transform:translate(5%,3%)}62%{transform:translate(-4%,5%)}75%{transform:translate(3%,-4%)}87%{transform:translate(-5%,2%)}100%{transform:translate(0,0)}}
+  .progress{position:fixed;top:0;left:0;height:2px;width:0;z-index:70;background:linear-gradient(90deg,var(--accent-deep),var(--accent));box-shadow:0 0 10px rgba(242,163,60,.55);transition:width .12s linear}
+  .embers{position:absolute;inset:0;z-index:2;pointer-events:none;overflow:hidden}
+  .ember{position:absolute;bottom:-12px;border-radius:50%;background:radial-gradient(circle,rgba(242,163,60,.95),rgba(242,163,60,0) 70%);opacity:0;animation:emberRise linear infinite;will-change:transform,opacity}
+  @keyframes emberRise{0%{transform:translateY(0) translateX(0) scale(.6);opacity:0}12%{opacity:.85}50%{transform:translateY(-44vh) translateX(14px) scale(1)}88%{opacity:.4}100%{transform:translateY(-88vh) translateX(-10px) scale(1.15);opacity:0}}
+
+  /* ---------- interaction polish ---------- */
+  .nav-links a{position:relative}
+  .nav-links a::after{content:"";position:absolute;left:0;right:100%;bottom:-7px;height:1.5px;background:var(--accent);transition:right .35s cubic-bezier(.16,1,.3,1)}
+  .nav-links a:hover::after,.nav-links a.active::after{right:0}
+  .nav-links a.active{color:var(--accent)}
+  .deck-cover{transition:box-shadow .4s ease,border-color .4s ease}
+  .deck-cover:hover{border-color:rgba(242,163,60,.5);box-shadow:0 16px 44px -10px rgba(242,163,60,.3)}
+  .g-item{transition:box-shadow .4s ease,border-color .4s ease}
+  .g-item:hover{border-color:rgba(242,163,60,.45);box-shadow:0 14px 38px -10px rgba(242,163,60,.26)}
+  .tool{transition:border-color .25s,transform .25s,box-shadow .35s}
+  .tool:hover{box-shadow:0 10px 26px -10px rgba(242,163,60,.3)}
+  .bigname,.portrait{will-change:transform}
+
+  /* card tilt + floating depth layers */
+  .p-media{transform-style:preserve-3d;transition:transform .5s cubic-bezier(.16,1,.3,1);will-change:transform}
+  .p-media .tag{transform:translateZ(48px)}
+  .p-media .glare{position:absolute;inset:0;z-index:4;pointer-events:none;opacity:0;transition:opacity .35s;background:radial-gradient(circle at var(--mx,50%) var(--my,50%),rgba(255,236,205,.22),transparent 46%)}
+  .p-media:hover .glare{opacity:1}
+
+  /* staggered slide + fade (children of a revealed block) */
+  .reveal .tool,
+  .reveal .tl li,
+  .reveal .edu li,
+  .reveal .langbars .lang,
+  .project .p-meta > *{
+    opacity:0;transform:translateY(24px);
+    transition:opacity .7s cubic-bezier(.16,1,.3,1),transform .7s cubic-bezier(.16,1,.3,1);
+  }
+  .reveal.in .tool,
+  .reveal.in .tl li,
+  .reveal.in .edu li,
+  .reveal.in .langbars .lang,
+  .project.in .p-meta > *{opacity:1;transform:none}
+
+  /* ---------- GALLERY ---------- */
+  .gallery-block{padding-top:0}
+  .gallery-collapse{display:grid;grid-template-rows:0fr;opacity:0;margin-top:0;transition:grid-template-rows .6s cubic-bezier(.16,1,.3,1),opacity .45s ease,margin-top .6s}
+  .gallery-collapse>.gallery-inner{overflow:hidden;min-height:0}
+  .gallery-block.open .gallery-collapse{grid-template-rows:1fr;opacity:1;margin-top:8px}
+  .gallery-tools{display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+  .min-btn{font-family:var(--mono);font-size:.64rem;letter-spacing:.12em;text-transform:uppercase;color:var(--white);background:var(--surface);border:1px solid var(--line);padding:8px 14px;border-radius:30px;cursor:pointer;transition:border-color .2s,color .2s,background .2s}
+  .min-btn:hover{border-color:var(--accent);color:var(--accent)}
+  .gallery-head{display:flex;justify-content:space-between;align-items:baseline;gap:18px;flex-wrap:wrap;margin:6px 0 22px;padding-top:26px;border-top:1px solid var(--line)}
+  .gallery-head h3{font-family:var(--display);font-weight:700;font-size:clamp(1.3rem,2.6vw,1.9rem);letter-spacing:-.01em}
+  .gallery-head .mono{color:var(--muted)}
+  .gallery{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:14px;align-items:start}
+  .g-item{position:relative;border-radius:10px;overflow:hidden;border:1px solid var(--line);cursor:pointer;background:var(--ink-2)}
+  .g-item img{width:100%;display:block;transition:transform .5s cubic-bezier(.16,1,.3,1)}
+  .g-item.g-tall{aspect-ratio:4/5}
+  .g-item.g-tall img{height:100%;object-fit:cover;object-position:center}
+  .g-item figcaption{position:absolute;left:0;right:0;bottom:0;padding:20px 12px 11px;font-family:var(--mono);font-size:.6rem;letter-spacing:.1em;text-transform:uppercase;color:var(--white);background:linear-gradient(transparent,rgba(20,18,16,.85));opacity:0;transform:translateY(6px);transition:opacity .3s,transform .3s}
+  .g-item:hover img{transform:scale(1.05)}
+  .g-item:hover figcaption{opacity:1;transform:none}
+
+  /* lightbox */
+  .lightbox{position:fixed;inset:0;z-index:1000;background:rgba(12,10,8,.94);backdrop-filter:blur(8px);display:none;align-items:center;justify-content:center;padding:24px}
+  .lightbox.open{display:flex}
+  .lightbox img{max-width:92vw;max-height:88vh;border-radius:8px;box-shadow:0 30px 80px rgba(0,0,0,.6)}
+  .lb-close,.lb-nav{position:absolute;background:rgba(34,29,24,.7);border:1px solid var(--line);color:var(--white);width:48px;height:48px;border-radius:50%;display:grid;place-items:center;cursor:pointer;font-size:1.3rem;line-height:1;transition:background .2s,border-color .2s,color .2s}
+  .lb-close:hover,.lb-nav:hover{background:var(--accent);color:#1a1410;border-color:var(--accent)}
+  .lb-close{top:20px;right:20px}
+  .lb-prev{left:20px;top:50%;transform:translateY(-50%)}
+  .lb-next{right:20px;top:50%;transform:translateY(-50%)}
+  .lb-count{position:absolute;bottom:22px;left:50%;transform:translateX(-50%);font-family:var(--mono);font-size:.7rem;letter-spacing:.14em;color:var(--muted)}
+  @media(max-width:560px){.gallery{grid-template-columns:repeat(auto-fill,minmax(140px,1fr))}.lb-nav{width:40px;height:40px}.lb-close{top:14px;right:14px}}
+
+  /* reveal */
+  .reveal{opacity:0;transform:translateY(28px);transition:opacity .9s cubic-bezier(.16,1,.3,1),transform .9s cubic-bezier(.16,1,.3,1)}
+  .reveal.in{opacity:1;transform:none}
+  html[data-scrolldir="up"] .reveal:not(.in){transform:translateY(-28px)}
+
+  /* ---------- RESPONSIVE ---------- */
+  @media(max-width:900px){
+    nav{position:fixed}
+    .nav-links{
+      position:absolute;top:calc(100% + 10px);right:0;min-width:210px;
+      flex-direction:column;align-items:stretch;gap:0;
+      background:rgba(20,18,16,.94);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
+      border:1px solid var(--line);border-radius:14px;padding:8px;
+      opacity:0;transform:translateY(-8px);pointer-events:none;
+      transition:opacity .28s ease,transform .28s ease;
+    }
+    nav.open .nav-links{opacity:1;transform:translateY(0);pointer-events:auto}
+    .nav-links a{padding:12px 14px;border-radius:9px}
+    .nav-links a:hover{background:rgba(255,255,255,.05);color:var(--white)}
+    .status{display:none}
+    .menu-btn{display:inline-block}
+    .namegrid{grid-template-columns:1fr}
+    .portrait{display:none}
+    .hero-cut{height:auto;width:94%;right:-8%;bottom:0;z-index:1;opacity:.14}
+    .hero-cut img{height:auto;width:100%}
+    .hero-cut-glow{display:none}
+    .about-grid{grid-template-columns:1fr}
+    .career-grid{grid-template-columns:1fr}
+    .toolkit-grid{grid-template-columns:1fr}
+    .rgrid{grid-template-columns:1fr}
+    .project{grid-template-columns:1fr}
+    .project.flip .p-media{order:0}
+    .hero-coords{display:none}
+  }
+  @media(max-width:560px){
+    .peek .thumbs{margin-left:0;width:100%}
+    .peek .thumbs a{flex:1}
+  }
+  @media(prefers-reduced-motion:reduce){
+    *{animation:none!important;transition:none!important;scroll-behavior:auto!important}
+    .bigname .ln span{transform:none!important}
+    .reveal{opacity:1;transform:none}
+  }
+  /* ---- hero pin + panel slide-over transition ---- */
+  .after-hero{position:relative;z-index:1;background:var(--ink);border-radius:30px 30px 0 0;box-shadow:0 -26px 60px rgba(0,0,0,.5)}
+  .after-hero > .marquee:first-child{border-top-left-radius:30px;border-top-right-radius:30px}
+  .hero-cut img{transform-origin:bottom center;will-change:transform}
+  #webgl{will-change:transform}
+  .hero-glow{will-change:transform}
+
+  /* ---- Project 07: presentation decks (row layout) ---- */
+  .deck-covers{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;align-items:start}
+  .deck-cover{position:relative;width:100%;aspect-ratio:16/9;border-radius:10px;overflow:hidden;border:1px solid var(--line);cursor:pointer;background:var(--ink-2)}
+  .deck-cover img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .55s cubic-bezier(.16,1,.3,1)}
+  .deck-cover:hover img{transform:scale(1.05)}
+  .deck-cover.open{outline:2px solid var(--accent);outline-offset:2px}
+  .deck-title{position:absolute;left:0;right:0;bottom:0;z-index:2;padding:26px 13px 11px;font-family:var(--display);font-weight:700;font-size:.92rem;letter-spacing:-.01em;color:var(--white);background:linear-gradient(transparent,rgba(20,18,16,.92))}
+  .deck-title small{display:block;font-family:var(--mono);font-weight:400;font-size:.52rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-top:4px}
+  .deck-badge{position:absolute;top:11px;right:11px;z-index:2;font-family:var(--mono);font-size:.54rem;letter-spacing:.1em;text-transform:uppercase;background:rgba(20,18,16,.7);backdrop-filter:blur(6px);border:1px solid var(--line);color:var(--white);padding:4px 8px;border-radius:20px}
+  .deck-more{position:absolute;inset:0;z-index:3;display:grid;place-items:center;background:rgba(18,15,12,.5);backdrop-filter:blur(1.5px);opacity:0;transition:opacity .3s}
+  .deck-more>span{font-family:var(--mono);font-size:.62rem;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);border:1px solid var(--accent);padding:8px 14px;border-radius:30px;background:rgba(20,18,16,.55);text-align:center}
+  .deck-cover:hover .deck-more,.deck-cover:focus-visible .deck-more,.deck-cover.open .deck-more{opacity:1}
+  .deck-cover:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+  .deck-panel{display:grid;grid-template-rows:0fr;opacity:0;margin-top:0;transition:grid-template-rows .6s cubic-bezier(.16,1,.3,1),opacity .45s ease,margin-top .6s}
+  .deck-panel.open{grid-template-rows:1fr;opacity:1;margin-top:18px}
+  .deck-grid{overflow:hidden;min-height:0}
+  .deck-panel-head{display:flex;justify-content:space-between;align-items:center;gap:14px;margin-bottom:14px;padding-top:16px;border-top:1px solid var(--line)}
+  .deck-panel-head span{font-family:var(--display);font-weight:700;font-size:clamp(1.05rem,2vw,1.35rem);letter-spacing:-.01em}
+  .g-item.g-wide{aspect-ratio:16/9}
+  .g-item.g-wide img{height:100%;object-fit:cover;object-position:center}
+  @media(max-width:860px){.deck-covers{grid-template-columns:repeat(2,1fr)}}
+  @media(max-width:480px){.deck-covers{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="progress" aria-hidden="true"></div>
+<div class="grain" aria-hidden="true"></div>
+
+<!-- film grain -->
+<svg class="grain"><filter id="n"><feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="3"/></filter><rect width="100%" height="100%" filter="url(#n)"/></svg>
+
+<!-- shared svg defs for duotone / specimens -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <linearGradient id="duo" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#2a2017"/><stop offset="1" stop-color="#0c0a08"/>
+    </linearGradient>
+    <radialGradient id="duoGlow" cx="0.7" cy="0.3" r="0.9">
+      <stop offset="0" stop-color="#f2a33c" stop-opacity=".55"/><stop offset="1" stop-color="#f2a33c" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+</svg>
+
+<nav id="nav">
+  <a class="brand" href="#top" aria-label="Edmund Chan — home"><span class="mark">E</span></a>
+  <div class="nav-links" id="navLinks">
+    <a href="#about">About</a>
+    <a href="#career">Career</a>
+    <a href="#toolkit">Skillset</a>
+    <a href="#work">Work</a>
+    <a href="#contact">Contact</a>
+  </div>
+  <span class="status"><span class="dot"></span>Open to collaboration · 2026</span>
+  <button class="menu-btn" id="menuBtn" aria-label="Menu" aria-expanded="false" aria-controls="navLinks">Menu</button>
+</nav>
+
+<!-- ================= HERO ================= -->
+<header class="hero" id="top">
+  <div class="hero-glow"></div>
+  <canvas id="webgl" aria-hidden="true"></canvas>
+  <div class="embers" aria-hidden="true"></div>
+  <div class="hero-cut-glow" aria-hidden="true"></div>
+  <figure class="hero-cut" aria-label="Portrait of Edmund Chan"><img src="assets/img001.webp" alt="Edmund Chan"></figure>
+  <div class="hero-inner">
+    <h1 class="bigname" aria-label="Edmund Chan">
+      <span class="ln"><span>Edmund</span></span>
+      <span class="ln"><span>Ch<em>a</em>n</span></span>
+    </h1>
+    <div class="hero-foot">
+      <p class="hero-thesis">Graphic designer focused on the fundamentals — elements, colour, and composition — now pushing brand and motion work into AI.</p>
+      <div class="hero-meta mono" style="color:var(--accent)">Selangor &nbsp;·&nbsp; 6 yrs experience &nbsp;·&nbsp; Senior Graphic Designer</div>
+    </div>
+  </div>
+  <div class="scrollcue"><span class="bar"></span>Scroll</div>
+</header>
+
+<div class="after-hero">
+
+<!-- ================= MARQUEE ================= -->
+<div class="marquee" aria-hidden="true">
+  <div class="marquee-track">
+    <span>Brand Identity</span><span class="star">✳</span><span class="dim">Art Direction</span><span class="star">✳</span><span>Motion Design</span><span class="star">✳</span><span class="dim">Social Media</span><span class="star">✳</span><span>Campaign Design</span><span class="star">✳</span>
+    <span>Brand Identity</span><span class="star">✳</span><span class="dim">Art Direction</span><span class="star">✳</span><span>Motion Design</span><span class="star">✳</span><span class="dim">Social Media</span><span class="star">✳</span><span>Campaign Design</span><span class="star">✳</span>
+  </div>
+</div>
+
+<!-- ================= ABOUT ================= -->
+<section class="sec about" id="about">
+  <div class="wrap">
+    <span class="eyebrow reveal" style="display:block;margin-bottom:34px">About</span>
+    <div class="about-grid">
+      <div class="yearsblock reveal">
+        <div class="years"><em>6</em></div>
+        <div class="ylabel">Years in practice — and counting</div>
+        <div class="facts">
+          <div><span>Based</span><span>Selangor, MY</span></div>
+          <div><span>Focus</span><span>Branding · Merchandise · Social · AI</span></div>
+          <div><span>Styles</span><span>Corporate · Minimalist · Luxury</span></div>
+          <div><span>Highlight</span><span>Poker Dream International Event</span></div>
+        </div>
+      </div>
+      <div class="philosophy reveal">
+        <h2>Great design comes from <em>curiosity, fundamentals, and adaptability</em> — and AI is an extension of creativity, not a replacement.</h2>
+        <p>I'm Edmund Chan, a graphic designer with six years across marketing agencies and in-house creative teams, partnering with diverse brands to pair strategic thinking with strong visual communication. My work spans social media design, packaging, branding &amp; logo design, and AI art direction — always aiming for design that's purposeful, not just attractive.</p>
+        <p>A career highlight was creating visual assets for the Poker Dream International Event — large-scale work that sharpened how I perform under pressure and run one major project alongside two or three more at once. I also lead and mentor designers, guiding creative direction while keeping quality consistent across every output.</p>
+        <p>My toolkit is Photoshop, Illustrator, After Effects, and Premiere Pro, leaning Corporate, Minimalist, Luxury, and Modern. Lately I integrate Higgsfield, Seedance, Nano Banana, Kling AI, and ChatGPT to explore ideas faster and push more experimental, forward-thinking outcomes.</p>
+        <span class="sign">— Edmund</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= CAREER / EDUCATION ================= -->
+<section class="sec career" id="career">
+  <div class="wrap">
+    <span class="eyebrow reveal" style="display:block;margin-bottom:34px">Career &amp; Education</span>
+    <div class="career-grid">
+      <div class="reveal">
+        <h3 class="col-h">Experience</h3>
+        <ul class="tl">
+          <li class="now">
+            <div class="yr">2026 — Present</div>
+            <div class="role">Senior Graphic Designer</div>
+            <div class="org">Golden Jaguar Sdn Bhd</div>
+          </li>
+          <li>
+            <div class="yr">2024 — 2025</div>
+            <div class="role">Event Graphic Designer</div>
+            <div class="org">Wulf Creative Sdn Bhd</div>
+          </li>
+          <li>
+            <div class="yr">2024</div>
+            <div class="role">Senior Graphic Designer</div>
+            <div class="org">Seeder Management Sdn Bhd</div>
+          </li>
+          <li>
+            <div class="yr">2023 — 2024</div>
+            <div class="role">Graphic &amp; Multimedia Designer</div>
+            <div class="org">Meen Tech Network</div>
+          </li>
+          <li>
+            <div class="yr">2021 — 2023</div>
+            <div class="role">Junior Graphic Designer</div>
+            <div class="org">United Digital Marketing</div>
+          </li>
+        </ul>
+      </div>
+      <div class="reveal">
+        <h3 class="col-h">Education</h3>
+        <ul class="edu">
+          <li>
+            <div class="yr">2019 — 2020</div>
+            <div class="deg">BA (Hons) Graphic Design</div>
+            <div class="sch">The University of Sheffield, UK</div>
+          </li>
+          <li>
+            <div class="yr">2016 — 2018</div>
+            <div class="deg">Diploma in Graphic Design</div>
+            <div class="sch">INTI International College</div>
+          </li>
+          <li>
+            <div class="yr">2010 — 2015</div>
+            <div class="deg">SPM</div>
+            <div class="sch">SMK Batu Unjur</div>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= TOOLKIT ================= -->
+<section class="sec" id="toolkit">
+  <div class="wrap">
+    <div class="sechead reveal">
+      <h2>Skillset &amp; Languages</h2>
+      <span class="num">[ DAY-TO-DAY ]</span>
+    </div>
+    <div class="toolkit-grid">
+      <div class="reveal">
+        <h3 class="mono" style="color:var(--muted);margin-bottom:18px">Software</h3>
+        <div class="tools">
+          <div class="tool"><span class="ic" style="background:#001e36;color:#31a8ff">Ps</span><b>Photoshop</b></div>
+          <div class="tool"><span class="ic" style="background:#330000;color:#ff9a00">Ai</span><b>Illustrator</b></div>
+          <div class="tool"><span class="ic" style="background:#00005b;color:#9a9aff">Ae</span><b>After Effects</b></div>
+          <div class="tool"><span class="ic" style="background:#00005b;color:#9a9aff">Pr</span><b>Premiere Pro</b></div>
+          <div class="tool"><span class="ic" style="background:#470137;color:#ff61f6">Xd</span><b>Adobe XD</b></div>
+          <div class="tool"><span class="ic" style="background:#001e36;color:#31a8ff">Lr</span><b>Lightroom</b></div>
+          <div class="tool"><span class="ic" style="background:#2a1f12;color:#f2a33c">Hf</span><b>Higgsfield</b></div>
+          <div class="tool"><span class="ic" style="background:#0b0b0b;color:#ffffff">Cc</span><b>CapCut</b></div>
+        </div>
+      </div>
+      <div class="reveal">
+        <h3 class="mono" style="color:var(--muted);margin-bottom:18px">Languages</h3>
+        <div class="langbars">
+          <div class="lang"><div class="top"><span>Mandarin</span><span>Native</span></div><div class="langbar"><i style="--w:96%"></i></div></div>
+          <div class="lang"><div class="top"><span>Cantonese</span><span>Fluent</span></div><div class="langbar"><i style="--w:86%"></i></div></div>
+          <div class="lang"><div class="top"><span>English</span><span>Professional</span></div><div class="langbar"><i style="--w:82%"></i></div></div>
+          <div class="lang"><div class="top"><span>Bahasa Melayu</span><span>Conversational</span></div><div class="langbar"><i style="--w:58%"></i></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= WORK ================= -->
+<section class="sec" id="work">
+  <div class="wrap">
+    <div class="sechead reveal">
+      <h2>Selected Work</h2>
+    </div>
+
+    <div class="signpost reveal">
+      <div class="sp-stage">
+        <div class="sp-glow"></div>
+        <div class="sp-scene sp-anim">
+          <div class="sp-pole"></div>
+          <div class="sp-base"></div>
+          <div class="sp-sign sp-top"><span class="sp-label">P<b>O</b>RTFOLIO</span></div>
+          <div class="sp-sign sp-cross">
+            <span class="sp-txt"><span class="sp-label">GRAPHIC DESIGN</span><span class="sp-sub">Brand.Visual.Campaign</span></span>
+            <span class="sp-arrow"></span>
+          </div>
+          <div class="sp-sticker sp-st1">E</div>
+          <div class="sp-sticker sp-st2">✳</div>
+          <div class="sp-sticker sp-st3">EST<br>· SEL ·</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Project 1 — Prop Wealth (real) -->
+    <article class="project reveal">
+      <div class="p-media" style="aspect-ratio:4/5">
+        <span class="tag">Brand &amp; Sales Marketing</span>
+        <img src="assets/img002.webp" alt="Prop Wealth training poster — Desmond Wai, exclusive sales training" loading="lazy" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover">
+      </div>
+      <div class="p-meta">
+        <span class="idx">01 / 2026</span>
+        <h3>Prop Wealth Sdn Bhd</h3>
+        <p class="desc">Lead designer on the full marketing creative suite for a Kuala Lumpur property-sales agency — a high-gloss gold-and-black system spanning sales-award posters, recruitment and training promos, festival greetings, and milestone announcements across the team.</p>
+        <ul class="p-tags"><li>Poster Design</li><li>Social Media</li><li>Event Collateral</li><li>Brand System</li></ul>
+        <a class="p-link" role="button" tabindex="0" data-target="gallery-pw">View the campaign gallery</a>
+      </div>
+    </article>
+
+    <!-- Prop Wealth gallery -->
+    <div class="gallery-block" id="gallery-pw">
+      <div class="gallery-collapse" id="galleryCollapse">
+        <div class="gallery-inner">
+          <div class="gallery-head">
+            <h3>Prop Wealth — campaign creatives</h3>
+            <div class="gallery-tools"><span class="mono">22 selected · tap to enlarge</span><button class="min-btn" aria-label="Minimize gallery">⤫ Minimize</button></div>
+          </div>
+          <div class="gallery" id="pwGallery">
+            <figure class="g-item"><img loading="lazy" src="assets/img002.webp" alt="Exclusive sales training — Desmond Wai"><figcaption>Exclusive Training · Desmond</figcaption></figure>
+            <figure class="g-item"><img loading="lazy" src="assets/img003.webp" alt="Promoted to Project Coordinator — Panda Lai"><figcaption>Promotion · Project Coordinator</figcaption></figure>
+            <figure class="g-item"><img loading="lazy" src="assets/img004.webp" alt="Champion — Top 3 Team Leader Personal Sales"><figcaption>Champion · Personal Sales</figcaption></figure>
+            <figure class="g-item"><img loading="lazy" src="assets/img005.webp" alt="Champion — Top 3 Supreme Leader Group Sales"><figcaption>Champion · Supreme Leader</figcaption></figure>
+            <figure class="g-item"><img loading="lazy" src="assets/img006.webp" alt="Champion — Top 5 Leader Group Sales"><figcaption>Champion · Group Sales</figcaption></figure>
+            <figure class="g-item"><img loading="lazy" src="assets/img007.webp" alt="Top Recruiter award poster"><figcaption>Top Recruiter</figcaption></figure>
+            <figure class="g-item"><img loading="lazy" src="assets/img008.webp" alt="Rising Rookie award poster"><figcaption>Rising Rookie</figcaption></figure>
+            <figure class="g-item"><img loading="lazy" src="assets/img009.webp" alt="Promoted to Team Leader announcement"><figcaption>Promotion · Team Leader</figcaption></figure>
+            <figure class="g-item"><img loading="lazy" src="assets/img010.webp" alt="Promoted to Leader announcement"><figcaption>Promotion · Leader</figcaption></figure>
+            <figure class="g-item"><img loading="lazy" src="assets/img011.webp" alt="Bali Incentive Trip 2026 qualifier"><figcaption>Bali Incentive Trip</figcaption></figure>
+            <figure class="g-item"><img loading="lazy" src="assets/img012.webp" alt="Car ceremony invitation"><figcaption>Car Ceremony</figcaption></figure>
+            <figure class="g-item"><img loading="lazy" src="assets/img013.webp" alt="Commission promo campaign"><figcaption>Commission Promo</figcaption></figure>
+            <figure class="g-item"><img loading="lazy" src="assets/img014.webp" alt="Recruitment event poster"><figcaption>Recruitment Event</figcaption></figure>
+            <figure class="g-item"><img loading="lazy" src="assets/img015.webp" alt="Team leader training event poster"><figcaption>Training Event</figcaption></figure>
+            <figure class="g-item"><img loading="lazy" src="assets/img016.webp" alt="January morning meet poster"><figcaption>Morning Meet</figcaption></figure>
+            <figure class="g-item"><img loading="lazy" src="assets/img017.webp" alt="New year 2026 greeting"><figcaption>New Year 2026</figcaption></figure>
+            <figure class="g-item"><img loading="lazy" src="assets/img018.webp" alt="Merry Christmas greeting"><figcaption>Merry Christmas</figcaption></figure>
+            <figure class="g-item"><img loading="lazy" src="assets/img019.webp" alt="Happy Thaipusam greeting"><figcaption>Thaipusam</figcaption></figure>
+            <figure class="g-item"><img loading="lazy" src="assets/img020.webp" alt="Managing Director birthday greeting"><figcaption>MD Birthday</figcaption></figure>
+            <figure class="g-item g-tall"><img loading="lazy" src="assets/img021.webp" alt="Challenge campaign thumbnail"><figcaption>12 Deals Challenge</figcaption></figure>
+            <figure class="g-item g-tall"><img loading="lazy" src="assets/img022.webp" alt="Morning meet sharing session thumbnail"><figcaption>Morning Meet · Reels</figcaption></figure>
+            <figure class="g-item g-tall"><img loading="lazy" src="assets/img023.webp" alt="Exclusive closing-technique training"><figcaption>Closing Masterclass</figcaption></figure>
+            </div>
+        </div>
+      </div>
+    </div>
+    <!-- Project 2 — QQPK (Wulfwerk) -->
+    <article class="project reveal flip">
+      <div class="p-media" style="aspect-ratio:16/9">
+        <span class="tag">Merchandise &amp; Apparel</span>
+        <img src="assets/img024.webp" alt="QQPK merchandise concept — cover" loading="lazy" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover">
+      </div>
+      <div class="p-meta">
+        <span class="idx">02 / 2024 — 2025</span>
+        <h3>QQPK — Your New Poker Path</h3>
+        <p class="desc">A full poker-inspired merchandise line for Wulfwerk — apparel and accessories built on a refined beige, black, and purple system. The QQPK mark and "Your New Poker Path" story run across polos, knitwear, a track jacket, caps, drinkware, and a collectible chip pin.</p>
+        <ul class="p-tags"><li>Merchandise</li><li>Apparel</li><li>Brand System</li><li>Product Design</li></ul>
+        <a class="p-link" role="button" tabindex="0" data-target="gallery-qq">View the full deck</a>
+      </div>
+    </article>
+
+    <div class="gallery-block" id="gallery-qq">
+      <div class="gallery-collapse">
+        <div class="gallery-inner">
+          <div class="gallery-head">
+            <h3>QQPK — merchandise concept deck</h3>
+            <div class="gallery-tools"><span class="mono">22 pages · tap to enlarge</span><button class="min-btn" aria-label="Minimize gallery">⤫ Minimize</button></div>
+          </div>
+          <div class="gallery">
+            <figure class="g-item"><img loading="lazy" src="assets/img025.webp" alt="QQPK — Cover · April 2025"><figcaption>Cover · April 2025</figcaption></figure>
+            <figure class="g-item"><img loading="lazy" src="assets/img026.webp" alt="QQPK — Product Categories"><figcaption>Product Categories</figcaption></figure>
+            <figure class="g-item"><img loading="lazy" src="assets/img027.webp" alt="QQPK — Polo Tee"><figcaption>Polo Tee</figcaption></figure>
+            <figure class="g-item"><img loading="lazy" src="assets/img028.webp" alt="QQPK — Polo Tee · Concept"><figcaption>Polo Tee · Concept</figcaption></figure>
+            <figure class="g-item"><img loading="lazy" src="assets/img029.webp" alt="QQPK — Polo Tee · Details & Sizing"><figcaption>Polo Tee · Details & Sizing</figcaption></figure>
+            <figure class="g-item"><img loading="lazy" src="assets/img030.webp" alt="QQPK — Neck Shirt"><figcaption>Neck Shirt</figcaption></figure>
+            <figure class="g-item"><img loading="lazy" src="assets/img031.webp" alt="QQPK — Neck Shirt · Concept"><figcaption>Neck Shirt · Concept</figcaption></figure>
+            <figure class="g-item"><img loading="lazy" src="assets/img032.webp" alt="QQPK — Neck Shirt · Details & Sizing"><figcaption>Neck Shirt · Details & Sizing</figcaption></figure>
+            <figure class="g-item"><img loading="lazy" src="assets/img033.webp" alt="QQPK — Track Jacket"><figcaption>Track Jacket</figcaption></figure>
+            <figure class="g-item"><img loading="lazy" src="assets/img034.webp" alt="QQPK — Track Jacket · Concept"><figcaption>Track Jacket · Concept</figcaption></figure>
+            <figure class="g-item"><img loading="lazy" src="assets/img035.webp" alt="QQPK — Track Jacket · Details & Sizing"><figcaption>Track Jacket · Details & Sizing</figcaption></figure>
+            <figure class="g-item"><img loading="lazy" src="assets/img036.webp" alt="QQPK — Long Sleeve"><figcaption>Long Sleeve</figcaption></figure>
+            <figure class="g-item"><img loading="lazy" src="assets/img037.webp" alt="QQPK — Long Sleeve · Concept"><figcaption>Long Sleeve · Concept</figcaption></figure>
+            <figure class="g-item"><img loading="lazy" src="assets/img038.webp" alt="QQPK — Long Sleeve · Details & Sizing"><figcaption>Long Sleeve · Details & Sizing</figcaption></figure>
+            <figure class="g-item"><img loading="lazy" src="assets/img039.webp" alt="QQPK — Drinking Bottle"><figcaption>Drinking Bottle</figcaption></figure>
+            <figure class="g-item"><img loading="lazy" src="assets/img040.webp" alt="QQPK — Drinking Bottle · Details"><figcaption>Drinking Bottle · Details</figcaption></figure>
+            <figure class="g-item"><img loading="lazy" src="assets/img041.webp" alt="QQPK — Baseball Cap"><figcaption>Baseball Cap</figcaption></figure>
+            <figure class="g-item"><img loading="lazy" src="assets/img042.webp" alt="QQPK — Baseball Cap · Concept"><figcaption>Baseball Cap · Concept</figcaption></figure>
+            <figure class="g-item"><img loading="lazy" src="assets/img043.webp" alt="QQPK — Baseball Cap · Details"><figcaption>Baseball Cap · Details</figcaption></figure>
+            <figure class="g-item"><img loading="lazy" src="assets/img044.webp" alt="QQPK — Badge Pin"><figcaption>Badge Pin</figcaption></figure>
+            <figure class="g-item"><img loading="lazy" src="assets/img045.webp" alt="QQPK — Badge Pin · Details"><figcaption>Badge Pin · Details</figcaption></figure>
+            <figure class="g-item"><img loading="lazy" src="assets/img046.webp" alt="QQPK — Your New Poker Path"><figcaption>Your New Poker Path</figcaption></figure>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Project 3 — QQPK Apparel Concepts -->
+    <article class="project reveal">
+      <div class="p-media" style="aspect-ratio:16/9">
+        <span class="tag">Merchandise &amp; Apparel</span>
+        <img src="assets/img047.webp" alt="QQPK apparel concepts — hoodie cover" loading="lazy" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover">
+      </div>
+      <div class="p-meta">
+        <span class="idx">03 / 2024 — 2025</span>
+        <h3>QQPK — Apparel Concepts</h3>
+        <p class="desc">Apparel design concepts for QQPK — pullover hoodies, windbreaker jackets, and caps explored across multiple graphic directions, from the purple "Be Ready, All-In" star to gold poker-suit script, each carrying the Your New Poker Path line.</p>
+        <ul class="p-tags"><li>Apparel</li><li>Hoodies</li><li>Headwear</li><li>Graphic Design</li></ul>
+        <a class="p-link" role="button" tabindex="0" data-target="gallery-qqa">View the full deck</a>
+      </div>
+    </article>
+
+    <div class="gallery-block" id="gallery-qqa">
+      <div class="gallery-collapse">
+        <div class="gallery-inner">
+          <div class="gallery-head">
+            <h3>QQPK — apparel design concepts</h3>
+            <div class="gallery-tools"><span class="mono">15 pages · tap to enlarge</span><button class="min-btn" aria-label="Minimize gallery">⤫ Minimize</button></div>
+          </div>
+          <div class="gallery">
+            <figure class="g-item"><img loading="lazy" src="assets/img047.webp" alt="QQPK Apparel — Hoodie"><figcaption>Hoodie</figcaption></figure>
+            <figure class="g-item"><img loading="lazy" src="assets/img048.webp" alt="QQPK Apparel — Hoodie · Be Ready, All-In"><figcaption>Hoodie · Be Ready, All-In</figcaption></figure>
+            <figure class="g-item"><img loading="lazy" src="assets/img049.webp" alt="QQPK Apparel — Hoodie · Next Evolution"><figcaption>Hoodie · Next Evolution</figcaption></figure>
+            <figure class="g-item"><img loading="lazy" src="assets/img050.webp" alt="QQPK Apparel — Hoodie · Aces Badge"><figcaption>Hoodie · Aces Badge</figcaption></figure>
+            <figure class="g-item"><img loading="lazy" src="assets/img051.webp" alt="QQPK Apparel — Hoodie · Your New Poker Path"><figcaption>Hoodie · Your New Poker Path</figcaption></figure>
+            <figure class="g-item"><img loading="lazy" src="assets/img052.webp" alt="QQPK Apparel — Windbreaker Jacket"><figcaption>Windbreaker Jacket</figcaption></figure>
+            <figure class="g-item"><img loading="lazy" src="assets/img053.webp" alt="QQPK Apparel — Jacket · Gold Suits Stripe"><figcaption>Jacket · Gold Suits Stripe</figcaption></figure>
+            <figure class="g-item"><img loading="lazy" src="assets/img054.webp" alt="QQPK Apparel — Jacket · Minimal Gold"><figcaption>Jacket · Minimal Gold</figcaption></figure>
+            <figure class="g-item"><img loading="lazy" src="assets/img055.webp" alt="QQPK Apparel — Jacket · Purple Star"><figcaption>Jacket · Purple Star</figcaption></figure>
+            <figure class="g-item"><img loading="lazy" src="assets/img056.webp" alt="QQPK Apparel — Jacket · Orbit"><figcaption>Jacket · Orbit</figcaption></figure>
+            <figure class="g-item"><img loading="lazy" src="assets/img057.webp" alt="QQPK Apparel — Baseball Cap"><figcaption>Baseball Cap</figcaption></figure>
+            <figure class="g-item"><img loading="lazy" src="assets/img058.webp" alt="QQPK Apparel — Cap · Sparkle"><figcaption>Cap · Sparkle</figcaption></figure>
+            <figure class="g-item"><img loading="lazy" src="assets/img059.webp" alt="QQPK Apparel — Cap · Monogram Gold"><figcaption>Cap · Monogram Gold</figcaption></figure>
+            <figure class="g-item"><img loading="lazy" src="assets/img060.webp" alt="QQPK Apparel — Cap · Pattern"><figcaption>Cap · Pattern</figcaption></figure>
+            <figure class="g-item"><img loading="lazy" src="assets/img061.webp" alt="QQPK Apparel — Cap · Script"><figcaption>Cap · Script</figcaption></figure>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Project 4 — QQPK Catalogue -->
+    <article class="project reveal flip">
+      <div class="p-media" style="aspect-ratio:16/9">
+        <span class="tag">Merchandise &amp; Apparel</span>
+        <img src="assets/img062.webp" alt="QQPK merchandise concept catalogue — cover" loading="lazy" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover">
+      </div>
+      <div class="p-meta">
+        <span class="idx">04 / 2024 — 2025</span>
+        <h3>QQPK — Merchandise Concept Catalogue</h3>
+        <p class="desc">The full QQPK brand line in its black-and-gold poker identity — competitive team kit (Taiwan / China / Malaysia), team jackets, a hostess uniform range, oversized streetwear tees, caps and hoodies, branded packaging, and the signature poker chips and playing cards.</p>
+        <ul class="p-tags"><li>Team Kit</li><li>Apparel</li><li>Packaging</li><li>Product Design</li></ul>
+        <a class="p-link" role="button" tabindex="0" data-target="gallery-qq3">View the full deck</a>
+      </div>
+    </article>
+
+    <div class="gallery-block" id="gallery-qq3">
+      <div class="gallery-collapse">
+        <div class="gallery-inner">
+          <div class="gallery-head">
+            <h3>QQPK — merchandise concept catalogue</h3>
+            <div class="gallery-tools"><span class="mono">34 pages · tap to enlarge</span><button class="min-btn" aria-label="Minimize gallery">⤫ Minimize</button></div>
+          </div>
+          <div class="gallery">
+            <figure class="g-item"><img loading="lazy" src="assets/img062.webp" alt="QQPK Catalogue — Cover · March 2025"><figcaption>Cover · March 2025</figcaption></figure>
+            <figure class="g-item"><img loading="lazy" src="assets/img063.webp" alt="QQPK Catalogue — Contents"><figcaption>Contents</figcaption></figure>
+            <figure class="g-item"><img loading="lazy" src="assets/img064.webp" alt="QQPK Catalogue — Team Jersey"><figcaption>Team Jersey</figcaption></figure>
+            <figure class="g-item"><img loading="lazy" src="assets/img065.webp" alt="QQPK Catalogue — Team Jersey · Details"><figcaption>Team Jersey · Details</figcaption></figure>
+            <figure class="g-item"><img loading="lazy" src="assets/img066.webp" alt="QQPK Catalogue — Team Jersey · Team Editions"><figcaption>Team Jersey · Team Editions</figcaption></figure>
+            <figure class="g-item"><img loading="lazy" src="assets/img067.webp" alt="QQPK Catalogue — Team Jersey · Worn"><figcaption>Team Jersey · Worn</figcaption></figure>
+            <figure class="g-item"><img loading="lazy" src="assets/img068.webp" alt="QQPK Catalogue — Team Jacket"><figcaption>Team Jacket</figcaption></figure>
+            <figure class="g-item"><img loading="lazy" src="assets/img069.webp" alt="QQPK Catalogue — Team Jacket · Details"><figcaption>Team Jacket · Details</figcaption></figure>
+            <figure class="g-item"><img loading="lazy" src="assets/img070.webp" alt="QQPK Catalogue — Team Jacket · Flag Editions"><figcaption>Team Jacket · Flag Editions</figcaption></figure>
+            <figure class="g-item"><img loading="lazy" src="assets/img071.webp" alt="QQPK Catalogue — Team Jacket · Worn"><figcaption>Team Jacket · Worn</figcaption></figure>
+            <figure class="g-item"><img loading="lazy" src="assets/img072.webp" alt="QQPK Catalogue — Hostess Uniform"><figcaption>Hostess Uniform</figcaption></figure>
+            <figure class="g-item"><img loading="lazy" src="assets/img073.webp" alt="QQPK Catalogue — Hostess Uniform · Looks"><figcaption>Hostess Uniform · Looks</figcaption></figure>
+            <figure class="g-item"><img loading="lazy" src="assets/img074.webp" alt="QQPK Catalogue — Hostess Uniform · Designs"><figcaption>Hostess Uniform · Designs</figcaption></figure>
+            <figure class="g-item"><img loading="lazy" src="assets/img075.webp" alt="QQPK Catalogue — Hostess Dress"><figcaption>Hostess Dress</figcaption></figure>
+            <figure class="g-item"><img loading="lazy" src="assets/img076.webp" alt="QQPK Catalogue — Hostess Dress · Flats"><figcaption>Hostess Dress · Flats</figcaption></figure>
+            <figure class="g-item"><img loading="lazy" src="assets/img077.webp" alt="QQPK Catalogue — Streetwear Tee"><figcaption>Streetwear Tee</figcaption></figure>
+            <figure class="g-item"><img loading="lazy" src="assets/img078.webp" alt="QQPK Catalogue — Tee · Comeback"><figcaption>Tee · Comeback</figcaption></figure>
+            <figure class="g-item"><img loading="lazy" src="assets/img079.webp" alt="QQPK Catalogue — Tee · All In Mentality"><figcaption>Tee · All In Mentality</figcaption></figure>
+            <figure class="g-item"><img loading="lazy" src="assets/img080.webp" alt="QQPK Catalogue — Tee · Designs"><figcaption>Tee · Designs</figcaption></figure>
+            <figure class="g-item"><img loading="lazy" src="assets/img081.webp" alt="QQPK Catalogue — Tee · Lookbook"><figcaption>Tee · Lookbook</figcaption></figure>
+            <figure class="g-item"><img loading="lazy" src="assets/img082.webp" alt="QQPK Catalogue — Tee · The Grind Never Folds"><figcaption>Tee · The Grind Never Folds</figcaption></figure>
+            <figure class="g-item"><img loading="lazy" src="assets/img083.webp" alt="QQPK Catalogue — Cap"><figcaption>Cap</figcaption></figure>
+            <figure class="g-item"><img loading="lazy" src="assets/img084.webp" alt="QQPK Catalogue — Cap · Details"><figcaption>Cap · Details</figcaption></figure>
+            <figure class="g-item"><img loading="lazy" src="assets/img085.webp" alt="QQPK Catalogue — Hoodie"><figcaption>Hoodie</figcaption></figure>
+            <figure class="g-item"><img loading="lazy" src="assets/img086.webp" alt="QQPK Catalogue — Hoodie · Lookbook"><figcaption>Hoodie · Lookbook</figcaption></figure>
+            <figure class="g-item"><img loading="lazy" src="assets/img087.webp" alt="QQPK Catalogue — Hoodie · Flats"><figcaption>Hoodie · Flats</figcaption></figure>
+            <figure class="g-item"><img loading="lazy" src="assets/img088.webp" alt="QQPK Catalogue — Paper Bag"><figcaption>Paper Bag</figcaption></figure>
+            <figure class="g-item"><img loading="lazy" src="assets/img089.webp" alt="QQPK Catalogue — Paper Bag · Designs"><figcaption>Paper Bag · Designs</figcaption></figure>
+            <figure class="g-item"><img loading="lazy" src="assets/img090.webp" alt="QQPK Catalogue — Poker Chips & Cards"><figcaption>Poker Chips & Cards</figcaption></figure>
+            <figure class="g-item"><img loading="lazy" src="assets/img091.webp" alt="QQPK Catalogue — Poker Chips · Colourways"><figcaption>Poker Chips · Colourways</figcaption></figure>
+            <figure class="g-item"><img loading="lazy" src="assets/img092.webp" alt="QQPK Catalogue — Card Box"><figcaption>Card Box</figcaption></figure>
+            <figure class="g-item"><img loading="lazy" src="assets/img093.webp" alt="QQPK Catalogue — Joker & Cover Cards"><figcaption>Joker & Cover Cards</figcaption></figure>
+            <figure class="g-item"><img loading="lazy" src="assets/img094.webp" alt="QQPK Catalogue — Playing Cards"><figcaption>Playing Cards</figcaption></figure>
+            <figure class="g-item"><img loading="lazy" src="assets/img095.webp" alt="QQPK Catalogue — Your New Poker Path"><figcaption>Your New Poker Path</figcaption></figure>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Project 5 — Social Media & Campaign Design (Wulfwerk) -->
+    <article class="project reveal">
+      <div class="p-media" style="aspect-ratio:4/5">
+        <span class="tag">Social Media &amp; Marketing</span>
+        <img src="assets/img096.webp" alt="Social media and campaign design — key visual" loading="lazy" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover">
+      </div>
+      <div class="p-meta">
+        <span class="idx">05 / 2024 — 2025</span>
+        <h3>Social Media &amp; Campaign Design</h3>
+        <p class="desc">A cross-brand body of social and marketing creatives produced at Wulfwerk — festive greetings, product launches, event key visuals, and promo campaigns spanning property, home appliances, fitness, and lifestyle clients including Akisama Group, Chin Hin, ELBA, Khind, EO Malaysia, Wolves Fitness, and QQPK.</p>
+        <ul class="p-tags"><li>Social Media</li><li>Key Visuals</li><li>Campaigns</li><li>Posters</li></ul>
+        <a class="p-link" role="button" tabindex="0" data-target="gallery-social">View the full set</a>
+      </div>
+    </article>
+
+    <div class="gallery-block" id="gallery-social">
+      <div class="gallery-collapse">
+        <div class="gallery-inner">
+          <div class="gallery-head">
+            <h3>Social media &amp; campaign design — selected creatives</h3>
+            <div class="gallery-tools"><span class="mono">24 pieces · tap to enlarge</span><button class="min-btn" aria-label="Minimize gallery">⤫ Minimize</button></div>
+          </div>
+          <div class="gallery">
+            <figure class="g-item g-tall"><img loading="lazy" src="assets/img097.webp" alt="Wulfwerk — QQPK × MR Club — Key Visual"><figcaption>QQPK × MR Club — Key Visual</figcaption></figure>
+            <figure class="g-item g-tall"><img loading="lazy" src="assets/img098.webp" alt="Wulfwerk — Akisama Group — Father's Day"><figcaption>Akisama Group — Father's Day</figcaption></figure>
+            <figure class="g-item g-tall"><img loading="lazy" src="assets/img099.webp" alt="Wulfwerk — Akisama Group — Labour Day"><figcaption>Akisama Group — Labour Day</figcaption></figure>
+            <figure class="g-item g-tall"><img loading="lazy" src="assets/img100.webp" alt="Wulfwerk — Akisama Group — SPA Explainer"><figcaption>Akisama Group — SPA Explainer</figcaption></figure>
+            <figure class="g-item g-tall"><img loading="lazy" src="assets/img101.webp" alt="Wulfwerk — Akisama Group — Awal Muharram"><figcaption>Akisama Group — Awal Muharram</figcaption></figure>
+            <figure class="g-item g-tall"><img loading="lazy" src="assets/img102.webp" alt="Wulfwerk — EO Malaysia — Fireside with Syed Saddiq"><figcaption>EO Malaysia — Fireside with Syed Saddiq</figcaption></figure>
+            <figure class="g-item g-tall"><img loading="lazy" src="assets/img103.webp" alt="Wulfwerk — ELBA — Double Treats, Double Fortune"><figcaption>ELBA — Double Treats, Double Fortune</figcaption></figure>
+            <figure class="g-item g-tall"><img loading="lazy" src="assets/img104.webp" alt="Wulfwerk — EO Malaysia — Art of Reinvention"><figcaption>EO Malaysia — Art of Reinvention</figcaption></figure>
+            <figure class="g-item g-tall"><img loading="lazy" src="assets/img105.webp" alt="Wulfwerk — Chin Hin · Crown Penang — Urban Sophistication"><figcaption>Chin Hin · Crown Penang — Urban Sophistication</figcaption></figure>
+            <figure class="g-item g-tall"><img loading="lazy" src="assets/img106.webp" alt="Wulfwerk — Chin Hin · Aricia Residences — Memories Take Root"><figcaption>Chin Hin · Aricia Residences — Memories Take Root</figcaption></figure>
+            <figure class="g-item g-tall"><img loading="lazy" src="assets/img107.webp" alt="Wulfwerk — Wolves Fitness — Indulgence in a Scoop"><figcaption>Wolves Fitness — Indulgence in a Scoop</figcaption></figure>
+            <figure class="g-item g-tall"><img loading="lazy" src="assets/img108.webp" alt="Wulfwerk — Wolves Fitness — Lactose-Free Protein"><figcaption>Wolves Fitness — Lactose-Free Protein</figcaption></figure>
+            <figure class="g-item g-tall"><img loading="lazy" src="assets/img109.webp" alt="Wulfwerk — Khind RTO — Jangan Kasi Pak-Teria Mendekat"><figcaption>Khind RTO — Jangan Kasi Pak-Teria Mendekat</figcaption></figure>
+            <figure class="g-item g-tall"><img loading="lazy" src="assets/img110.webp" alt="Wulfwerk — Khind — Washer Dryer Comparison"><figcaption>Khind — Washer Dryer Comparison</figcaption></figure>
+            <figure class="g-item g-tall"><img loading="lazy" src="assets/img111.webp" alt="Wulfwerk — Khind RTO — Chill Jer, Semua Settle"><figcaption>Khind RTO — Chill Jer, Semua Settle</figcaption></figure>
+            <figure class="g-item g-tall"><img loading="lazy" src="assets/img112.webp" alt="Wulfwerk — Khind RTO — Steam Iron"><figcaption>Khind RTO — Steam Iron</figcaption></figure>
+            <figure class="g-item g-tall"><img loading="lazy" src="assets/img113.webp" alt="Wulfwerk — Khind RTO — Kedut Hilang, Hati Senang"><figcaption>Khind RTO — Kedut Hilang, Hati Senang</figcaption></figure>
+            <figure class="g-item g-tall"><img loading="lazy" src="assets/img114.webp" alt="Wulfwerk — QQPK — Next Brand Ambassador"><figcaption>QQPK — Next Brand Ambassador</figcaption></figure>
+            <figure class="g-item g-tall"><img loading="lazy" src="assets/img115.webp" alt="Wulfwerk — QQPK × Korea Poker Cup — Free Entry"><figcaption>QQPK × Korea Poker Cup — Free Entry</figcaption></figure>
+            <figure class="g-item g-tall"><img loading="lazy" src="assets/img116.webp" alt="Wulfwerk — QQPK — DPT Đà Nẵng Giveaway"><figcaption>QQPK — DPT Đà Nẵng Giveaway</figcaption></figure>
+            <figure class="g-item g-tall"><img loading="lazy" src="assets/img117.webp" alt="Wulfwerk — QQPK Taiwan — KOL 100× Challenge"><figcaption>QQPK Taiwan — KOL 100× Challenge</figcaption></figure>
+            <figure class="g-item g-tall"><img loading="lazy" src="assets/img118.webp" alt="Wulfwerk — QQPK × Ace King Club — Pull-Up Banner"><figcaption>QQPK × Ace King Club — Pull-Up Banner</figcaption></figure>
+            <figure class="g-item g-tall"><img loading="lazy" src="assets/img119.webp" alt="Wulfwerk — QQPK — Danny Tang Fan Series"><figcaption>QQPK — Danny Tang Fan Series</figcaption></figure>
+            <figure class="g-item g-tall"><img loading="lazy" src="assets/img120.webp" alt="Wulfwerk — QQPK — Danny Tang Fan Series · Details"><figcaption>QQPK — Danny Tang Fan Series · Details</figcaption></figure>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Project 6 — Meen (Meen Tech Network) -->
+    <article class="project reveal flip">
+      <div class="p-media" style="aspect-ratio:4/5">
+        <span class="tag">Product Launch &amp; Brand</span>
+        <img src="assets/img121.webp" alt="Meen M60 5G key visual — Unlock Infinite Possibilities" loading="lazy" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover">
+      </div>
+      <div class="p-meta">
+        <span class="idx">06 / 2024</span>
+        <h3>Meen — M60 Smartphone Launch</h3>
+        <p class="desc">Graphic &amp; multimedia designer for Meen, a Malaysian smartphone brand — owning the M60 5G launch from teaser to shelf. Built the visual language across hero key visuals, spec posters, colourway shots, and social cut-downs, plus the "meen SPACE" brand campaign in collaboration with TARUMT.</p>
+        <ul class="p-tags"><li>Product Launch</li><li>Key Visuals</li><li>Social Media</li><li>Brand Campaign</li></ul>
+        <a class="p-link" role="button" tabindex="0" data-target="gallery-meen">View the launch gallery</a>
+      </div>
+    </article>
+
+    <!-- Meen gallery -->
+    <div class="gallery-block" id="gallery-meen">
+      <div class="gallery-collapse">
+        <div class="gallery-inner">
+          <div class="gallery-head">
+            <h3>Meen — M60 launch &amp; brand campaign</h3>
+            <div class="gallery-tools"><span class="mono">13 pieces · tap to enlarge</span><button class="min-btn" aria-label="Minimize gallery">⤫ Minimize</button></div>
+          </div>
+          <div class="gallery">
+            <figure class="g-item g-tall"><img loading="lazy" src="assets/img122.webp" alt="Meen M60 hero key visual"><figcaption>M60 · Hero Key Visual</figcaption></figure>
+            <figure class="g-item g-tall"><img loading="lazy" src="assets/img123.webp" alt="Meen M60 5G campaign with athlete"><figcaption>M60 5G · Athlete Campaign</figcaption></figure>
+            <figure class="g-item g-tall"><img loading="lazy" src="assets/img124.webp" alt="Meen M60 emerald colourway, dual handsets"><figcaption>Emerald · Dual Tone</figcaption></figure>
+            <figure class="g-item g-tall"><img loading="lazy" src="assets/img125.webp" alt="Meen M60 Now Available launch poster"><figcaption>M60 · Now Available</figcaption></figure>
+            <figure class="g-item g-tall"><img loading="lazy" src="assets/img126.webp" alt="Meen M60 emerald rear camera detail"><figcaption>Emerald · Camera Detail</figcaption></figure>
+            <figure class="g-item g-tall"><img loading="lazy" src="assets/img121.webp" alt="Meen M60 5G spec poster — Unlock Infinite Possibilities"><figcaption>M60 5G · Spec Poster</figcaption></figure>
+            <figure class="g-item g-tall"><img loading="lazy" src="assets/img127.webp" alt="Meen M60 green and black colourways"><figcaption>Colourways · Green & Black</figcaption></figure>
+            <figure class="g-item g-tall"><img loading="lazy" src="assets/img128.webp" alt="Meen M60 spec poster, floral key visual"><figcaption>M60 · Spec Sheet</figcaption></figure>
+            <figure class="g-item g-tall"><img loading="lazy" src="assets/img129.webp" alt="Meen grand launching Kuala Lumpur teaser"><figcaption>Grand Launch · KL</figcaption></figure>
+            <figure class="g-item g-tall"><img loading="lazy" src="assets/img130.webp" alt="Meen M60 price reveal poster RM3,499"><figcaption>M60 · Price Reveal</figcaption></figure>
+            <figure class="g-item g-tall"><img loading="lazy" src="assets/img131.webp" alt="meen SPACE astronaut teaser — Journey Awaits"><figcaption>meen SPACE · Journey Awaits</figcaption></figure>
+            <figure class="g-item g-tall"><img loading="lazy" src="assets/img132.webp" alt="M60 Never Miss a Moment vertical key visual"><figcaption>Never Miss a Moment</figcaption></figure>
+            <figure class="g-item g-tall"><img loading="lazy" src="assets/img133.webp" alt="meen × TARUMT — meen SPACE rocket campaign"><figcaption>meen × TARUMT</figcaption></figure>
+            </div>
+        </div>
+      </div>
+    </div>
+
+    <article class="project reveal">
+      <div class="p-media" style="aspect-ratio:4/3">
+        <span class="tag">Presentation Design</span>
+        <img src="assets/img134.webp" alt="Presentation design — selected deck covers" loading="lazy" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover">
+      </div>
+      <div class="p-meta">
+        <span class="idx">07 / 2025</span>
+        <h3>Presentation &amp; Deck Design</h3>
+        <p class="desc">Full presentation systems for company profiles, AGMs and investor decks — cover concepts, layout grids, data and timeline slides, all carried by one consistent visual language. Four selected decks spanning tech, logistics, blockchain and corporate.</p>
+        <ul class="p-tags"><li>Presentation Design</li><li>Slide Layout</li><li>Company Profile</li><li>Pitch Deck</li></ul>
+        <a class="p-link" role="button" tabindex="0" data-target="gallery-decks">View the deck gallery</a>
+      </div>
+    </article>
+
+    <!-- Presentation decks gallery -->
+    <div class="gallery-block" id="gallery-decks">
+      <div class="gallery-collapse">
+        <div class="gallery-inner">
+          <div class="gallery-head">
+            <h3>Selected presentation decks</h3>
+            <div class="gallery-tools"><span class="mono">6 decks · 91 slides · tap a deck to open it</span><button class="min-btn" aria-label="Minimize gallery">⤫ Minimize</button></div>
+          </div>
+          <div class="deck-covers">
+            <div class="deck-cover" role="button" tabindex="0" aria-expanded="false" aria-controls="deckpanel-silica" aria-label="Silica-AI — expand 25 slides">
+              <img loading="lazy" src="assets/img134.webp" alt="Silica-AI deck cover">
+              <span class="deck-badge">25 slides</span>
+              <span class="deck-title">Silica-AI<small>Company Profile · AI &amp; Blockchain</small></span>
+              <span class="deck-more"><span>View more →</span></span>
+            </div>
+            <div class="deck-cover" role="button" tabindex="0" aria-expanded="false" aria-controls="deckpanel-intralink" aria-label="Intralink International Shipping — expand 17 slides">
+              <img loading="lazy" src="assets/img135.webp" alt="Intralink International Shipping deck cover">
+              <span class="deck-badge">17 slides</span>
+              <span class="deck-title">Intralink International Shipping<small>Logistics Company Profile</small></span>
+              <span class="deck-more"><span>View more →</span></span>
+            </div>
+            <div class="deck-cover" role="button" tabindex="0" aria-expanded="false" aria-controls="deckpanel-kingsman" aria-label="Kingsman Alliance — expand 10 slides">
+              <img loading="lazy" src="assets/img136.webp" alt="Kingsman Alliance deck cover">
+              <span class="deck-badge">10 slides</span>
+              <span class="deck-title">Kingsman Alliance<small>Blockchain Gateway · 区块链</small></span>
+              <span class="deck-more"><span>View more →</span></span>
+            </div>
+            <div class="deck-cover" role="button" tabindex="0" aria-expanded="false" aria-controls="deckpanel-vg" aria-label="Prop Wealth · AGM 2025 — expand 22 slides">
+              <img loading="lazy" src="assets/img137.webp" alt="Prop Wealth · AGM 2025 deck cover">
+              <span class="deck-badge">22 slides</span>
+              <span class="deck-title">Prop Wealth · AGM 2025<small>Annual General Meeting</small></span>
+              <span class="deck-more"><span>View more →</span></span>
+            </div>
+
+            <div class="deck-cover" role="button" tabindex="0" aria-expanded="false" aria-controls="deckpanel-pwmm" aria-label="Prop Wealth · Dec Morning Meeting — open carousel">
+              <img src="assets/img138.webp" alt="Prop Wealth · Dec Morning Meeting cover">
+              <span class="deck-badge">9 slides</span>
+              <span class="deck-title">Prop Wealth · Dec Morning Meeting<small>Monthly Sales Gathering · 晨会</small></span>
+              <span class="deck-more"><span>View more →</span></span>
+            </div>
+            <div class="deck-cover" role="button" tabindex="0" aria-expanded="false" aria-controls="deckpanel-50ai" aria-label="50AI · Smart Customer Service — open carousel">
+              <img src="assets/img139.webp" alt="50AI · Smart Customer Service cover">
+              <span class="deck-badge">8 slides</span>
+              <span class="deck-title">50AI · Smart Customer Service<small>Product Pitch Deck · 智能客服</small></span>
+              <span class="deck-more"><span>View more →</span></span>
+            </div>
+          </div>
+          <div class="deck-panel" id="deckpanel-silica" role="region" aria-label="Silica-AI slides">
+            <div class="deck-grid"><div class="deck-panel-inner">
+              <div class="deck-panel-head"><span>Silica-AI · 25 slides</span><button class="min-btn deck-close" type="button" aria-label="Close Silica-AI">⤫ Close</button></div>
+              <div class="gallery deck-slides">
+                <figure class="g-item g-wide"><img loading="lazy" src="assets/img140.webp" alt="Silica-AI — slide 2"><figcaption>02 / 25</figcaption></figure>
+                <figure class="g-item g-wide"><img loading="lazy" src="assets/img141.webp" alt="Silica-AI — slide 3"><figcaption>03 / 25</figcaption></figure>
+                <figure class="g-item g-wide"><img loading="lazy" src="assets/img142.webp" alt="Silica-AI — slide 4"><figcaption>04 / 25</figcaption></figure>
+                <figure class="g-item g-wide"><img loading="lazy" src="assets/img143.webp" alt="Silica-AI — slide 5"><figcaption>05 / 25</figcaption></figure>
+                <figure class="g-item g-wide"><img loading="lazy" src="assets/img144.webp" alt="Silica-AI — slide 6"><figcaption>06 / 25</figcaption></figure>
+                <figure class="g-item g-wide"><img loading="lazy" src="assets/img145.webp" alt="Silica-AI — slide 7"><figcaption>07 / 25</figcaption></figure>
+                <figure class="g-item g-wide"><img loading="lazy" src="assets/img146.webp" alt="Silica-AI — slide 8"><figcaption>08 / 25</figcaption></figure>
+                <figure class="g-item g-wide"><img loading="lazy" src="assets/img147.webp" alt="Silica-AI — slide 9"><figcaption>09 / 25</figcaption></figure>
+                <figure class="g-item g-wide"><img loading="lazy" src="assets/img148.webp" alt="Silica-AI — slide 10"><figcaption>10 / 25</figcaption></figure>
+                <figure class="g-item g-wide"><img loading="lazy" src="assets/img149.webp" alt="Silica-AI — slide 11"><figcaption>11 / 25</figcaption></figure>
+                <figure class="g-item g-wide"><img loading="lazy" src="assets/img150.webp" alt="Silica-AI — slide 12"><figcaption>12 / 25</figcaption></figure>
+                <figure class="g-item g-wide"><img loading="lazy" src="assets/img151.webp" alt="Silica-AI — slide 13"><figcaption>13 / 25</figcaption></figure>
+                <figure class="g-item g-wide"><img loading="lazy" src="assets/img152.webp" alt="Silica-AI — slide 14"><figcaption>14 / 25</figcaption></figure>
+                <figure class="g-item g-wide"><img loading="lazy" src="assets/img153.webp" alt="Silica-AI — slide 15"><figcaption>15 / 25</figcaption></figure>
+                <figure class="g-item g-wide"><img loading="lazy" src="assets/img154.webp" alt="Silica-AI — slide 16"><figcaption>16 / 25</figcaption></figure>
+                <figure class="g-item g-wide"><img loading="lazy" src="assets/img155.webp" alt="Silica-AI — slide 17"><figcaption>17 / 25</figcaption></figure>
+                <figure class="g-item g-wide"><img loading="lazy" src="assets/img156.webp" alt="Silica-AI — slide 18"><figcaption>18 / 25</figcaption></figure>
+                <figure class="g-item g-wide"><img loading="lazy" src="assets/img157.webp" alt="Silica-AI — slide 19"><figcaption>19 / 25</figcaption></figure>
+                <figure class="g-item g-wide"><img loading="lazy" src="assets/img158.webp" alt="Silica-AI — slide 20"><figcaption>20 / 25</figcaption></figure>
+                <figure class="g-item g-wide"><img loading="lazy" src="assets/img159.webp" alt="Silica-AI — slide 21"><figcaption>21 / 25</figcaption></figure>
+                <figure class="g-item g-wide"><img loading="lazy" src="assets/img160.webp" alt="Silica-AI — slide 22"><figcaption>22 / 25</figcaption></figure>
+                <figure class="g-item g-wide"><img loading="lazy" src="assets/img161.webp" alt="Silica-AI — slide 23"><figcaption>23 / 25</figcaption></figure>
+                <figure class="g-item g-wide"><img loading="lazy" src="assets/img162.webp" alt="Silica-AI — slide 24"><figcaption>24 / 25</figcaption></figure>
+                <figure class="g-item g-wide"><img loading="lazy" src="assets/img163.webp" alt="Silica-AI — slide 25"><figcaption>25 / 25</figcaption></figure>
+              </div>
+            </div></div>
+          </div>
+          <div class="deck-panel" id="deckpanel-intralink" role="region" aria-label="Intralink International Shipping slides">
+            <div class="deck-grid"><div class="deck-panel-inner">
+              <div class="deck-panel-head"><span>Intralink International Shipping · 17 slides</span><button class="min-btn deck-close" type="button" aria-label="Close Intralink International Shipping">⤫ Close</button></div>
+              <div class="gallery deck-slides">
+                <figure class="g-item g-wide"><img loading="lazy" src="assets/img164.webp" alt="Intralink International Shipping — slide 2"><figcaption>02 / 17</figcaption></figure>
+                <figure class="g-item g-wide"><img loading="lazy" src="assets/img165.webp" alt="Intralink International Shipping — slide 3"><figcaption>03 / 17</figcaption></figure>
+                <figure class="g-item g-wide"><img loading="lazy" src="assets/img166.webp" alt="Intralink International Shipping — slide 4"><figcaption>04 / 17</figcaption></figure>
+                <figure class="g-item g-wide"><img loading="lazy" src="assets/img167.webp" alt="Intralink International Shipping — slide 5"><figcaption>05 / 17</figcaption></figure>
+                <figure class="g-item g-wide"><img loading="lazy" src="assets/img168.webp" alt="Intralink International Shipping — slide 6"><figcaption>06 / 17</figcaption></figure>
+                <figure class="g-item g-wide"><img loading="lazy" src="assets/img169.webp" alt="Intralink International Shipping — slide 7"><figcaption>07 / 17</figcaption></figure>
+                <figure class="g-item g-wide"><img loading="lazy" src="assets/img170.webp" alt="Intralink International Shipping — slide 8"><figcaption>08 / 17</figcaption></figure>
+                <figure class="g-item g-wide"><img loading="lazy" src="assets/img171.webp" alt="Intralink International Shipping — slide 9"><figcaption>09 / 17</figcaption></figure>
+                <figure class="g-item g-wide"><img loading="lazy" src="assets/img172.webp" alt="Intralink International Shipping — slide 10"><figcaption>10 / 17</figcaption></figure>
+                <figure class="g-item g-wide"><img loading="lazy" src="assets/img173.webp" alt="Intralink International Shipping — slide 11"><figcaption>11 / 17</figcaption></figure>
+                <figure class="g-item g-wide"><img loading="lazy" src="assets/img174.webp" alt="Intralink International Shipping — slide 12"><figcaption>12 / 17</figcaption></figure>
+                <figure class="g-item g-wide"><img loading="lazy" src="assets/img175.webp" alt="Intralink International Shipping — slide 13"><figcaption>13 / 17</figcaption></figure>
+                <figure class="g-item g-wide"><img loading="lazy" src="assets/img176.webp" alt="Intralink International Shipping — slide 14"><figcaption>14 / 17</figcaption></figure>
+                <figure class="g-item g-wide"><img loading="lazy" src="assets/img177.webp" alt="Intralink International Shipping — slide 15"><figcaption>15 / 17</figcaption></figure>
+                <figure class="g-item g-wide"><img loading="lazy" src="assets/img178.webp" alt="Intralink International Shipping — slide 16"><figcaption>16 / 17</figcaption></figure>
+                <figure class="g-item g-wide"><img loading="lazy" src="assets/img179.webp" alt="Intralink International Shipping — slide 17"><figcaption>17 / 17</figcaption></figure>
+              </div>
+            </div></div>
+          </div>
+          <div class="deck-panel" id="deckpanel-kingsman" role="region" aria-label="Kingsman Alliance slides">
+            <div class="deck-grid"><div class="deck-panel-inner">
+              <div class="deck-panel-head"><span>Kingsman Alliance · 10 slides</span><button class="min-btn deck-close" type="button" aria-label="Close Kingsman Alliance">⤫ Close</button></div>
+              <div class="gallery deck-slides">
+                <figure class="g-item g-wide"><img loading="lazy" src="assets/img180.webp" alt="Kingsman Alliance — slide 2"><figcaption>02 / 10</figcaption></figure>
+                <figure class="g-item g-wide"><img loading="lazy" src="assets/img181.webp" alt="Kingsman Alliance — slide 3"><figcaption>03 / 10</figcaption></figure>
+                <figure class="g-item g-wide"><img loading="lazy" src="assets/img182.webp" alt="Kingsman Alliance — slide 4"><figcaption>04 / 10</figcaption></figure>
+                <figure class="g-item g-wide"><img loading="lazy" src="assets/img183.webp" alt="Kingsman Alliance — slide 5"><figcaption>05 / 10</figcaption></figure>
+                <figure class="g-item g-wide"><img loading="lazy" src="assets/img184.webp" alt="Kingsman Alliance — slide 6"><figcaption>06 / 10</figcaption></figure>
+                <figure class="g-item g-wide"><img loading="lazy" src="assets/img185.webp" alt="Kingsman Alliance — slide 7"><figcaption>07 / 10</figcaption></figure>
+                <figure class="g-item g-wide"><img loading="lazy" src="assets/img186.webp" alt="Kingsman Alliance — slide 8"><figcaption>08 / 10</figcaption></figure>
+                <figure class="g-item g-wide"><img loading="lazy" src="assets/img187.webp" alt="Kingsman Alliance — slide 9"><figcaption>09 / 10</figcaption></figure>
+                <figure class="g-item g-wide"><img loading="lazy" src="assets/img188.webp" alt="Kingsman Alliance — slide 10"><figcaption>10 / 10</figcaption></figure>
+              </div>
+            </div></div>
+          </div>
+          <div class="deck-panel" id="deckpanel-vg" role="region" aria-label="Prop Wealth · AGM 2025 slides">
+            <div class="deck-grid"><div class="deck-panel-inner">
+              <div class="deck-panel-head"><span>Prop Wealth · AGM 2025 · 22 slides</span><button class="min-btn deck-close" type="button" aria-label="Close Prop Wealth · AGM 2025">⤫ Close</button></div>
+              <div class="gallery deck-slides">
+                <figure class="g-item g-wide"><img loading="lazy" src="assets/img189.webp" alt="Prop Wealth · AGM 2025 — slide 2"><figcaption>02 / 22</figcaption></figure>
+                <figure class="g-item g-wide"><img loading="lazy" src="assets/img190.webp" alt="Prop Wealth · AGM 2025 — slide 3"><figcaption>03 / 22</figcaption></figure>
+                <figure class="g-item g-wide"><img loading="lazy" src="assets/img191.webp" alt="Prop Wealth · AGM 2025 — slide 4"><figcaption>04 / 22</figcaption></figure>
+                <figure class="g-item g-wide"><img loading="lazy" src="assets/img192.webp" alt="Prop Wealth · AGM 2025 — slide 5"><figcaption>05 / 22</figcaption></figure>
+                <figure class="g-item g-wide"><img loading="lazy" src="assets/img193.webp" alt="Prop Wealth · AGM 2025 — slide 6"><figcaption>06 / 22</figcaption></figure>
+                <figure class="g-item g-wide"><img loading="lazy" src="assets/img194.webp" alt="Prop Wealth · AGM 2025 — slide 7"><figcaption>07 / 22</figcaption></figure>
+                <figure class="g-item g-wide"><img loading="lazy" src="assets/img195.webp" alt="Prop Wealth · AGM 2025 — slide 8"><figcaption>08 / 22</figcaption></figure>
+                <figure class="g-item g-wide"><img loading="lazy" src="assets/img196.webp" alt="Prop Wealth · AGM 2025 — slide 9"><figcaption>09 / 22</figcaption></figure>
+                <figure class="g-item g-wide"><img loading="lazy" src="assets/img197.webp" alt="Prop Wealth · AGM 2025 — slide 10"><figcaption>10 / 22</figcaption></figure>
+                <figure class="g-item g-wide"><img loading="lazy" src="assets/img198.webp" alt="Prop Wealth · AGM 2025 — slide 11"><figcaption>11 / 22</figcaption></figure>
+                <figure class="g-item g-wide"><img loading="lazy" src="assets/img199.webp" alt="Prop Wealth · AGM 2025 — slide 12"><figcaption>12 / 22</figcaption></figure>
+                <figure class="g-item g-wide"><img loading="lazy" src="assets/img200.webp" alt="Prop Wealth · AGM 2025 — slide 13"><figcaption>13 / 22</figcaption></figure>
+                <figure class="g-item g-wide"><img loading="lazy" src="assets/img201.webp" alt="Prop Wealth · AGM 2025 — slide 14"><figcaption>14 / 22</figcaption></figure>
+                <figure class="g-item g-wide"><img loading="lazy" src="assets/img202.webp" alt="Prop Wealth · AGM 2025 — slide 15"><figcaption>15 / 22</figcaption></figure>
+                <figure class="g-item g-wide"><img loading="lazy" src="assets/img203.webp" alt="Prop Wealth · AGM 2025 — slide 16"><figcaption>16 / 22</figcaption></figure>
+                <figure class="g-item g-wide"><img loading="lazy" src="assets/img204.webp" alt="Prop Wealth · AGM 2025 — slide 17"><figcaption>17 / 22</figcaption></figure>
+                <figure class="g-item g-wide"><img loading="lazy" src="assets/img205.webp" alt="Prop Wealth · AGM 2025 — slide 18"><figcaption>18 / 22</figcaption></figure>
+                <figure class="g-item g-wide"><img loading="lazy" src="assets/img206.webp" alt="Prop Wealth · AGM 2025 — slide 19"><figcaption>19 / 22</figcaption></figure>
+                <figure class="g-item g-wide"><img loading="lazy" src="assets/img207.webp" alt="Prop Wealth · AGM 2025 — slide 20"><figcaption>20 / 22</figcaption></figure>
+                <figure class="g-item g-wide"><img loading="lazy" src="assets/img208.webp" alt="Prop Wealth · AGM 2025 — slide 21"><figcaption>21 / 22</figcaption></figure>
+                <figure class="g-item g-wide"><img loading="lazy" src="assets/img209.webp" alt="Prop Wealth · AGM 2025 — slide 22"><figcaption>22 / 22</figcaption></figure>
+              </div>
+            </div></div>
+          </div>
+          <div class="deck-panel" id="deckpanel-pwmm" role="region" aria-label="Prop Wealth · Dec Morning Meeting slides">
+            <div class="deck-grid"><div class="deck-panel-inner">
+              <div class="deck-panel-head"><span>Prop Wealth · Dec Morning Meeting · 9 slides</span><button class="min-btn deck-close" type="button" aria-label="Close Prop Wealth · Dec Morning Meeting">⤫ Close</button></div>
+              <div class="gallery deck-slides">
+                <figure class="g-item g-wide"><img loading="lazy" src="assets/img138.webp" alt="Prop Wealth · Dec Morning Meeting slide 1"></figure>
+                <figure class="g-item g-wide"><img loading="lazy" src="assets/img210.webp" alt="Prop Wealth · Dec Morning Meeting slide 2"></figure>
+                <figure class="g-item g-wide"><img loading="lazy" src="assets/img211.webp" alt="Prop Wealth · Dec Morning Meeting slide 3"></figure>
+                <figure class="g-item g-wide"><img loading="lazy" src="assets/img212.webp" alt="Prop Wealth · Dec Morning Meeting slide 4"></figure>
+                <figure class="g-item g-wide"><img loading="lazy" src="assets/img213.webp" alt="Prop Wealth · Dec Morning Meeting slide 5"></figure>
+                <figure class="g-item g-wide"><img loading="lazy" src="assets/img214.webp" alt="Prop Wealth · Dec Morning Meeting slide 6"></figure>
+                <figure class="g-item g-wide"><img loading="lazy" src="assets/img215.webp" alt="Prop Wealth · Dec Morning Meeting slide 7"></figure>
+                <figure class="g-item g-wide"><img loading="lazy" src="assets/img216.webp" alt="Prop Wealth · Dec Morning Meeting slide 8"></figure>
+                <figure class="g-item g-wide"><img loading="lazy" src="assets/img217.webp" alt="Prop Wealth · Dec Morning Meeting slide 9"></figure>
+              </div>
+            </div></div>
+          </div>
+          <div class="deck-panel" id="deckpanel-50ai" role="region" aria-label="50AI · Smart Customer Service slides">
+            <div class="deck-grid"><div class="deck-panel-inner">
+              <div class="deck-panel-head"><span>50AI · Smart Customer Service · 8 slides</span><button class="min-btn deck-close" type="button" aria-label="Close 50AI · Smart Customer Service">⤫ Close</button></div>
+              <div class="gallery deck-slides">
+                <figure class="g-item g-wide"><img loading="lazy" src="assets/img139.webp" alt="50AI · Smart Customer Service slide 1"></figure>
+                <figure class="g-item g-wide"><img loading="lazy" src="assets/img218.webp" alt="50AI · Smart Customer Service slide 2"></figure>
+                <figure class="g-item g-wide"><img loading="lazy" src="assets/img219.webp" alt="50AI · Smart Customer Service slide 3"></figure>
+                <figure class="g-item g-wide"><img loading="lazy" src="assets/img220.webp" alt="50AI · Smart Customer Service slide 4"></figure>
+                <figure class="g-item g-wide"><img loading="lazy" src="assets/img221.webp" alt="50AI · Smart Customer Service slide 5"></figure>
+                <figure class="g-item g-wide"><img loading="lazy" src="assets/img222.webp" alt="50AI · Smart Customer Service slide 6"></figure>
+                <figure class="g-item g-wide"><img loading="lazy" src="assets/img223.webp" alt="50AI · Smart Customer Service slide 7"></figure>
+                <figure class="g-item g-wide"><img loading="lazy" src="assets/img224.webp" alt="50AI · Smart Customer Service slide 8"></figure>
+              </div>
+            </div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+  </div>
+</section>
+
+<!-- ================= CONTACT ================= -->
+<section class="contact" id="contact">
+  <div class="glow"></div>
+  <div class="wrap">
+    <span class="eyebrow">Open to collaboration — 2026</span>
+    <h2>Let's make something<br>worth <em>a second look.</em></h2>
+    <button class="cta" id="getInTouch" type="button" aria-expanded="false" aria-controls="emailReveal">Get in touch →</button>
+    <div class="cta-reveal" id="emailReveal" aria-live="polite">
+      <a class="rv-email" href="mailto:edmundchan97@gmail.com?subject=Let%27s%20work%20together">edmundchan97@gmail.com</a>
+      <a class="rv-link" href="https://www.linkedin.com/in/edmund-chan-349a44133" target="_blank" rel="noopener noreferrer">LinkedIn ↗</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap foot">
+    <span class="mono">© <span id="yr"></span> Edmund Chan — Senior Graphic Designer</span>
+    <div class="socials">
+      <a href="#top">Back to top ↑</a>
+    </div>
+  </div>
+</footer>
+</div><!-- /after-hero -->
+
+<div class="lightbox" id="lightbox" aria-hidden="true">
+  <button class="lb-close" id="lbClose" aria-label="Close">✕</button>
+  <button class="lb-nav lb-prev" id="lbPrev" aria-label="Previous">‹</button>
+  <img id="lbImg" src="" alt="Prop Wealth poster">
+  <button class="lb-nav lb-next" id="lbNext" aria-label="Next">›</button>
+  <div class="lb-count" id="lbCount"></div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script>
+  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  document.getElementById('yr').textContent = new Date().getFullYear();
+
+  // back-to-top (and logo) — always smooth-scroll to very top
+  document.querySelectorAll('a[href="#top"]').forEach(function(a){
+    a.addEventListener('click', function(e){ e.preventDefault(); window.scrollTo({ top: 0, behavior: 'smooth' }); });
+  });
+
+  // scroll-progress bar
+  var pbar = document.querySelector('.progress');
+  if (pbar) {
+    var updP = function(){ var h=document.documentElement, sc=h.scrollTop||document.body.scrollTop, max=h.scrollHeight-h.clientHeight; pbar.style.width=(max>0?(sc/max*100):0)+'%'; };
+    addEventListener('scroll', updP, {passive:true}); addEventListener('resize', updP, {passive:true}); updP();
+  }
+
+  // hero embers (drifting warm motes; skipped for reduced-motion)
+  if (!matchMedia('(prefers-reduced-motion:reduce)').matches) {
+    var ec = document.querySelector('.embers');
+    if (ec) { for (var i=0;i<16;i++){ var e=document.createElement('span'); e.className='ember'; var s=(2+Math.random()*4).toFixed(1); e.style.left=(Math.random()*100).toFixed(1)+'%'; e.style.width=e.style.height=s+'px'; e.style.animationDuration=(7+Math.random()*9).toFixed(1)+'s'; e.style.animationDelay=(-Math.random()*14).toFixed(1)+'s'; ec.appendChild(e); } }
+  }
+
+  var hoverFine = matchMedia('(hover:hover)').matches, motionOk = !matchMedia('(prefers-reduced-motion:reduce)').matches;
+
+  // scroll-spy nav (highlight the section you're in)
+  var navMap={}; document.querySelectorAll('.nav-links a[href^="#"]').forEach(function(a){ var id=a.getAttribute('href').slice(1); if(id&&id!=='top') navMap[id]=a; });
+  var spySecs=['about','career','toolkit','work','contact'].map(function(id){return document.getElementById(id);}).filter(Boolean);
+  if ('IntersectionObserver' in window && spySecs.length) {
+    var spy=new IntersectionObserver(function(es){ es.forEach(function(en){ if(en.isIntersecting){ var id=en.target.id; Object.keys(navMap).forEach(function(k){ navMap[k].classList.toggle('active', k===id); }); } }); }, {rootMargin:'-45% 0px -50% 0px', threshold:0});
+    spySecs.forEach(function(s){ spy.observe(s); });
+  }
+
+  // magnetic Get-in-touch button
+  var ctaB=document.querySelector('.cta');
+  if (ctaB && hoverFine && motionOk) {
+    ctaB.addEventListener('pointermove', function(ev){ var r=ctaB.getBoundingClientRect(); var mx=ev.clientX-r.left-r.width/2, my=ev.clientY-r.top-r.height/2; ctaB.style.transform='translate('+(mx*0.25).toFixed(1)+'px,'+(my*0.35-3).toFixed(1)+'px)'; });
+    ctaB.addEventListener('pointerleave', function(){ ctaB.style.transform=''; });
+  }
+
+  // nav scrolled state
+  const nav = document.getElementById('nav');
+  const onScroll = () => nav.classList.toggle('scrolled', window.scrollY > 40);
+  onScroll();
+  window.addEventListener('scroll', onScroll, {passive:true});
+
+  // hero load reveal
+  const setLoaded = () => document.body.classList.add('loaded');
+  window.addEventListener('load', setLoaded);
+  if (document.readyState === 'complete') setLoaded();
+
+  // scroll direction (for direction-aware reveals)
+  let _lastY = window.scrollY;
+  window.addEventListener('scroll', () => {
+    const y = window.scrollY;
+    if (Math.abs(y - _lastY) > 4) {
+      document.documentElement.setAttribute('data-scrolldir', y > _lastY ? 'down' : 'up');
+      _lastY = y;
+    }
+  }, {passive:true});
+
+  // scroll reveal + child stagger (re-animates each time it enters view)
+  if (!reduce && 'IntersectionObserver' in window) {
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.querySelectorAll('.tool, .tl li, .edu li, .langbars .lang, .p-meta > *')
+            .forEach((k, i) => { k.style.transitionDelay = (i * 75) + 'ms'; });
+          e.target.classList.add('in');
+        } else {
+          e.target.classList.remove('in');
+        }
+      });
+    }, {threshold:.12, rootMargin:'0px 0px -10% 0px'});
+    document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+  } else {
+    document.querySelectorAll('.reveal').forEach(el => el.classList.add('in'));
+  }
+
+  // mobile dropdown menu
+  (function(){
+    const menuBtn = document.getElementById('menuBtn');
+    const navEl = document.getElementById('nav');
+    if (!menuBtn || !navEl) return;
+    const close = () => { navEl.classList.remove('open'); menuBtn.setAttribute('aria-expanded','false'); menuBtn.textContent='Menu'; };
+    menuBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const open = navEl.classList.toggle('open');
+      menuBtn.setAttribute('aria-expanded', open ? 'true' : 'false');
+      menuBtn.textContent = open ? 'Close' : 'Menu';
+    });
+    navEl.querySelectorAll('#navLinks a').forEach(a => a.addEventListener('click', close));
+    document.addEventListener('click', (e) => { if (navEl.classList.contains('open') && !navEl.contains(e.target)) close(); });
+    document.addEventListener('keydown', (e) => { if (e.key === 'Escape') close(); });
+  })();
+
+  // ---------- gallery lightbox (multi-project) ----------
+  (function () {
+    const lb = document.getElementById('lightbox');
+    if (!lb) return;
+    const lbImg = document.getElementById('lbImg');
+    const lbCount = document.getElementById('lbCount');
+    let items = [], idx = 0;
+    function show(i) {
+      idx = (i + items.length) % items.length;
+      const im = items[idx];
+      lbImg.src = im.dataset.full || im.src;
+      lbImg.alt = im.alt;
+      lbCount.textContent = (idx + 1) + ' / ' + items.length;
+    }
+    function open(list, i) { items = list; show(i); lb.classList.add('open'); lb.setAttribute('aria-hidden', 'false'); }
+    function close() { lb.classList.remove('open'); lb.setAttribute('aria-hidden', 'true'); lbImg.src = ''; }
+    document.querySelectorAll('.gallery').forEach(g => {
+      const gi = Array.from(g.querySelectorAll('img'));
+      gi.forEach((img, i) => img.addEventListener('click', () => open(gi, i)));
+    });
+    document.getElementById('lbClose').addEventListener('click', close);
+    document.getElementById('lbPrev').addEventListener('click', (e) => { e.stopPropagation(); show(idx - 1); });
+    document.getElementById('lbNext').addEventListener('click', (e) => { e.stopPropagation(); show(idx + 1); });
+    lb.addEventListener('click', (e) => { if (e.target === lb || e.target === lbImg) close(); });
+    document.addEventListener('keydown', (e) => {
+      if (!lb.classList.contains('open')) return;
+      if (e.key === 'Escape') close();
+      else if (e.key === 'ArrowLeft') show(idx - 1);
+      else if (e.key === 'ArrowRight') show(idx + 1);
+    });
+  })();
+
+  // ---------- gallery open / minimize (per project) ----------
+  (function(){
+    document.querySelectorAll('.p-link[data-target]').forEach(link => {
+      function openTarget(e){
+        if(e) e.preventDefault();
+        const block = document.getElementById(link.dataset.target);
+        if(!block) return;
+        block.classList.add('open');
+        requestAnimationFrame(()=>block.scrollIntoView({behavior:reduce?'auto':'smooth',block:'start'}));
+      }
+      link.addEventListener('click', openTarget);
+      link.addEventListener('keydown', function(e){ if(e.key==='Enter'||e.key===' ') openTarget(e); });
+    });
+    document.querySelectorAll('.min-btn').forEach(btn => {
+      btn.addEventListener('click', function(){
+        const block = btn.closest('.gallery-block');
+        if(!block) return;
+        const proj = block.previousElementSibling || document.getElementById('work');
+        block.classList.remove('open');
+        requestAnimationFrame(()=>proj.scrollIntoView({behavior:reduce?'auto':'smooth',block:'start'}));
+      });
+    });
+  })();
+
+  // ---------- pointer state (shared) ----------
+  let tpx = 0, tpy = 0, px = 0, py = 0;
+  if (!reduce) {
+    window.addEventListener('pointermove', (e) => {
+      tpx = (e.clientX / window.innerWidth) * 2 - 1;
+      tpy = (e.clientY / window.innerHeight) * 2 - 1;
+    }, {passive:true});
+  }
+
+  // ---------- card tilt + glare + depth ----------
+  if (!reduce) {
+    document.querySelectorAll('.p-media').forEach(card => {
+      const glare = document.createElement('div');
+      glare.className = 'glare';
+      card.appendChild(glare);
+      card.addEventListener('pointermove', (e) => {
+        const r = card.getBoundingClientRect();
+        const cx = (e.clientX - r.left) / r.width;
+        const cy = (e.clientY - r.top) / r.height;
+        card.style.transform = `perspective(1000px) rotateX(${(0.5 - cy) * 11}deg) rotateY(${(cx - 0.5) * 13}deg)`;
+        card.style.setProperty('--mx', (cx * 100) + '%');
+        card.style.setProperty('--my', (cy * 100) + '%');
+      });
+      card.addEventListener('pointerleave', () => { card.style.transform = ''; });
+    });
+  }
+
+  // ---------- hero scroll parallax ----------
+  const bigname = document.querySelector('.bigname');
+  const portrait = document.querySelector('.portrait');
+  let praf;
+  function heroParallax() {
+    const y = window.scrollY;
+    if (bigname) bigname.style.transform = `translateY(${y * 0.12}px)`;
+    if (portrait) portrait.style.transform = `translateY(${y * -0.06}px)`;
+  }
+  if (!reduce) {
+    window.addEventListener('scroll', () => {
+      cancelAnimationFrame(praf);
+      praf = requestAnimationFrame(heroParallax);
+    }, {passive:true});
+  }
+
+  // ---------- WebGL hero sculpture ----------
+  (function () {
+    if (typeof THREE === 'undefined') return;
+    const canvas = document.getElementById('webgl');
+    const hero = document.querySelector('.hero');
+    if (!canvas || !hero) return;
+
+    const renderer = new THREE.WebGLRenderer({canvas, alpha:true, antialias:true});
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+    const scene = new THREE.Scene();
+    const cam = new THREE.PerspectiveCamera(45, 1, 0.1, 100);
+    cam.position.z = 6;
+
+    const group = new THREE.Group();
+    scene.add(group);
+
+    const core = new THREE.Mesh(
+      new THREE.IcosahedronGeometry(1.55, 1),
+      new THREE.MeshStandardMaterial({color:0x17130e, metalness:0.55, roughness:0.32, flatShading:true})
+    );
+    group.add(core);
+
+    const wire = new THREE.Mesh(
+      new THREE.IcosahedronGeometry(1.95, 1),
+      new THREE.MeshBasicMaterial({color:0xf2a33c, wireframe:true, transparent:true, opacity:0.13})
+    );
+    group.add(wire);
+
+    scene.add(new THREE.AmbientLight(0x40382f, 0.55));
+    const key = new THREE.DirectionalLight(0xfff1de, 1.05); key.position.set(3, 4, 5); scene.add(key);
+    const amber = new THREE.PointLight(0xf2a33c, 2.6, 22); amber.position.set(-3.2, -1, 3); scene.add(amber);
+    const ember = new THREE.PointLight(0xc8431c, 1.4, 22); ember.position.set(2.4, -3, -2); scene.add(ember);
+    const cool  = new THREE.PointLight(0x3a5a8a, 1.0, 22); cool.position.set(0, 4, -3); scene.add(cool);
+
+    let baseY = 0;
+    function resize() {
+      const w = hero.clientWidth, h = hero.clientHeight || window.innerHeight;
+      renderer.setSize(w, h, false);
+      cam.aspect = w / h; cam.updateProjectionMatrix();
+      const wide = w > 900;
+      group.position.x = wide ? 1.5 : 0;
+      baseY = wide ? 1.15 : 1.3;
+      const s = wide ? 0.9 : 0.7;
+      group.scale.set(s, s, s);
+    }
+    window.addEventListener('resize', resize);
+    resize();
+
+    let t = 0;
+    function loop() {
+      t += 0.0045;
+      px += (tpx - px) * 0.05;
+      py += (tpy - py) * 0.05;
+      group.rotation.y = t + px * 0.5;
+      group.rotation.x = Math.sin(t * 0.6) * 0.14 + py * 0.3;
+      group.position.y = baseY + Math.sin(t * 1.1) * 0.16;
+      wire.rotation.y = -t * 0.65;
+      wire.rotation.x = t * 0.3;
+      renderer.render(scene, cam);
+      requestAnimationFrame(loop);
+    }
+    if (reduce) { renderer.render(scene, cam); } else { loop(); }
+  })();
+</script>
+<script>
+(function(){
+  var btn=document.getElementById('getInTouch'),em=document.getElementById('emailReveal');
+  if(btn&&em){btn.addEventListener('click',function(){var open=em.classList.toggle('show');btn.setAttribute('aria-expanded',open?'true':'false');});}
+})();
+</script>
+<script>
+/* hero pin-zoom on scroll (paired with .after-hero panel slide-over) */
+(function(){
+  if(matchMedia('(prefers-reduced-motion:reduce)').matches) return;
+  var img=document.querySelector('.hero-cut img'),
+      inner=document.querySelector('.hero-inner'),
+      glow=document.querySelector('.hero-glow'),
+      gl=document.getElementById('webgl'),
+      cue=document.querySelector('.scrollcue');
+  var ticking=false;
+  function update(){
+    ticking=false;
+    var vh=window.innerHeight||1, p=Math.min(1,Math.max(0,window.scrollY/(vh*0.92)));
+    var e=p*p*(3-2*p); /* smoothstep */
+    if(img) img.style.transform='scale('+(1+0.42*e)+') translateY('+(-6*e)+'%)';
+    if(gl) gl.style.transform='scale('+(1+0.25*e)+')';
+    if(glow) glow.style.transform='scale('+(1+0.6*e)+')';
+    if(inner){ inner.style.transform='translateY('+(-26*e)+'px)'; inner.style.opacity=String(Math.max(0,1-1.25*p)); }
+    if(cue) cue.style.opacity=String(Math.max(0,1-2*p));
+  }
+  addEventListener('scroll',function(){ if(!ticking){ticking=true;requestAnimationFrame(update);} },{passive:true});
+  addEventListener('resize',update,{passive:true});
+  update();
+})();
+</script>
+<script>
+/* Project 07 — deck covers in a row; open one to reveal its slides full-width below */
+(function(){
+  function setOpen(cov,panel,open){
+    cov.classList.toggle('open',open);
+    cov.setAttribute('aria-expanded',open?'true':'false');
+    panel.classList.toggle('open',open);
+    var s=cov.querySelector('.deck-more>span'); if(s) s.textContent=open?'Hide ↑':'View more →';
+  }
+  document.querySelectorAll('#gallery-decks .deck-cover').forEach(function(cov){
+    var panel=document.getElementById(cov.getAttribute('aria-controls'));
+    if(!panel) return;
+    function toggle(){
+      var willOpen = !cov.classList.contains('open');
+      if(willOpen){
+        document.querySelectorAll('#gallery-decks .deck-cover.open').forEach(function(oc){
+          if(oc!==cov){ var op=document.getElementById(oc.getAttribute('aria-controls')); if(op) setOpen(oc,op,false); }
+        });
+      }
+      setOpen(cov,panel,willOpen);
+    }
+    cov.addEventListener('click',toggle);
+    cov.addEventListener('keydown',function(e){if(e.key==='Enter'||e.key===' '){e.preventDefault();toggle();}});
+    var cl=panel.querySelector('.deck-close');
+    if(cl) cl.addEventListener('click',function(){ setOpen(cov,panel,false); cov.scrollIntoView({behavior:'smooth',block:'center'}); });
+  });
+
+})();
+</script>
+<script>
+(function(){
+  var stage=document.querySelector('.sp-stage'), scene=stage&&stage.querySelector('.sp-scene');
+  if(!stage||!scene) return;
+  if(matchMedia('(prefers-reduced-motion:reduce)').matches) return;
+  if(!matchMedia('(hover:hover)').matches) return;
+  stage.addEventListener('pointermove',function(e){
+    var r=stage.getBoundingClientRect();
+    var px=(e.clientX-r.left)/r.width-0.5, py=(e.clientY-r.top)/r.height-0.5;
+    scene.style.setProperty('--ry',(-13 + px*18)+'deg');
+    scene.style.setProperty('--rx',(7 - py*13)+'deg');
+  });
+  stage.addEventListener('pointerleave',function(){
+    scene.style.setProperty('--ry','-13deg'); scene.style.setProperty('--rx','7deg');
+  });
+})();
+</script>
+</body>
+</html>
